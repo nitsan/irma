@@ -2,11 +2,13 @@ var express = require('express');
 var app = express();
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var apis = require('./BE/apis.js');
+var path = require('path');
+var apis = require('./server/apis.js');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 
-app.use(express.static('app/www'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use('/', apis);

@@ -1,0 +1,117 @@
+<div class="content container">
+    <button type="button" class="btn btn-warning btn-lg create-btn" data-placement="top" ui-sref="createCandidate"><i class="fa fa-plus"></i> Add Candidate</button>
+    <h2 class="page-title">Candidate List</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <section class="widget">
+                <header>
+                    <!--<h4>-->
+                    <!--Candidate List-->
+                    <!--</h4>-->
+                    <div class="widget-controls">
+                        <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
+                        <a data-widgster="close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="body">
+                    <input type="search" class="candidate-search form-control search-query" placeholder="Search..." ng-model="searchText">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="hidden-xs">#</th>
+                            <th>Picture</th>
+                            <th>First Name</th>
+                            <th class="hidden-xs">Last Name</th>
+                            <th class="hidden-xs">Phone</th>
+                            <th class="hidden-xs">email</th>
+                            <th class="hidden-xs">Interviewer Name</th>
+                            <th class="hidden-xs">Team</th>
+                            <th class="hidden-xs">Date</th>
+                            <th class="hidden-xs">Time</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="candidate in candidateListCtrl.candidates | filter:searchText">
+                            <td class="hidden-xs">{{$index + 1}}</td>
+                            <td>
+                                <img class="img-rounded" ng-src="{{candidate.img}}" alt="" height="50">
+                            </td>
+                            <td>
+                                {{candidate.firstName}}
+                            </td>
+                            <td>
+                                {{candidate.lastName}}
+                            </td>
+                            <td>
+                                {{candidate.candidatePhone}}
+                            </td>
+                            <td>
+                                {{candidate.candidateEmail}}
+                            </td>
+                            <td>
+                                {{candidate.interviewerName}}
+                            </td>
+                            <td>
+                                {{candidate.team}}
+                            </td>
+                            <td>
+                                {{candidate.date | date:"MM/dd/yyyy"}}
+                            </td>
+                            <td>
+                                {{candidate.date | date:"HH:mm"}}
+                            </td>
+                            <td>
+                                <button class="btn btn-default btn-sm" title="Edit Candidate" ng-click="candidateListCtrl.editCandidate(candidate.id)">
+                                    Edit
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-default btn-sm">
+                                    New Meeting
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" title="Delete Candidate" ng-click="candidateListCtrl.delete(candidate)">
+                                    <i class="fa fa-trash big"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-sm" title="Send SMS to Candidate" ng-click="candidateListCtrl.sendSMS(candidate)">
+                                    <i class="fa fa-mobile big"></i>
+                                </button>
+                            </td>
+
+                        </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="clearfix">
+                        <div class="pull-right">
+                            <button class="btn btn-default btn-sm">
+                                Send to ...
+                            </button>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-inverse dropdown-toggle" data-toggle="dropdown">
+                                    &nbsp; Clear &nbsp;
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#">Clear</a></li>
+                                    <li><a href="#">Move ...</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div class="loader-wrap hiding hide">
+    <i class="fa fa-circle-o-notch fa-spin"></i>
+</div>

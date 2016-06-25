@@ -1,0 +1,47 @@
+.meet-logo{
+    width: 100px;
+    left: -23px;
+    position: absolute;
+    top: 4px;
+}
+.create-btn{
+    float: right;
+}
+i.big{
+    font-size: 20px;
+}
+.img-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.enter-img{
+    width: 400px;
+    margin-bottom: 15px;
+}
+.waze-btn{
+    border-radius: 10px;
+    width: 250px;
+}
+.google-maps-btn{
+    border-radius: 10px;
+    height: 90px;
+    display: block;
+    margin-top: 10px;
+}
+.navigation-buttons{
+    margin-top: 40px;
+}
+.candidate-search{
+    width: 250px;
+}
+@media (max-width: 768px) {
+    .meet-logo{
+     left: 0;
+    }
+    .wrap {
+        margin-left: 0;
+    }
+    .enter-img {
+        max-width: 100%;
+    }
+}
