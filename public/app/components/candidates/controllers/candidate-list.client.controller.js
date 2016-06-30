@@ -1,5 +1,5 @@
 angular.module('candidates')
-    .controller('candidateListController', function($scope, candidateListService, createCandidateService, $state, smsService) {
+    .controller('candidateListController', function($scope, candidateListService, createCandidateService, $state, smsService, toastr) {
         //this.candidates = candidateListService.getCandidates();
         //this.candidates = fireBaseService.getCandidates();
 
@@ -23,8 +23,11 @@ angular.module('candidates')
             $state.go("createCandidate", {candidateId: candidateId});
         };
 
-        this.delete = function(candidate){
-            candidateListService.delete(candidate);
+        this.deleteCandidate = function(candidate){
+            candidateListService.delete(candidate)
+                .then(function(){
+                    toastr.success("Candidate " + candidate.firstName + " " + candidate.lastName + "has been deleted", "Delete");
+                });
         };
 
         this.sendSMS = function(candidate){

@@ -2,22 +2,13 @@
  * Created by Nitsan Zohar on 28/10/2015.
  */
 
-//myDataRef.set({name: name, text: text});
-//myDataRef.push({name: name, text: text});
-//myDataRef.on('child_added', function(snapshot) {
-//    //We'll fill this in later.
-//    var message = snapshot.val();
-//    displayChatMessage(message.name, message.text);
-//});
-
 angular.module('meetFireBase')
     .factory('fireBaseService', function (fireBaseConfig, $firebaseAuth, $log, $q, $firebaseObject, $firebaseArray) {
-        var baseUrl = fireBaseConfig.baseUrl;
         //var ref = new Firebase("https://meet-irma.firebaseio.com");
         //var data = $firebaseObject(ref);
-        var candidatesDataRef = new Firebase(baseUrl + '/candidates');
+        var candidatesDataRef = firebase.database().ref('candidates');
         //var usersDataRef = new Firebase(baseUrl + 'users');
-        var interviewersDataRef = new Firebase(baseUrl + '/interviewers');
+        var interviewersDataRef = firebase.database().ref('interviewers'); //new Firebase(baseUrl + '/interviewers');
         //var candidatesObj = null;
         var candidates = [];
         var interviewers = null;
@@ -54,11 +45,11 @@ angular.module('meetFireBase')
             //    }
             //},
             saveCandidate: function (candidate) {
-                candidate.date = candidate.date.toString(); // firebase cannot save Date object
+                // candidate.date = candidate.date.toString(); // firebase cannot save Date object
                 if (candidate.id) {
                     return candidates.$save(candidate);
                 } else {
-                    candidate.id = Firebase.ServerValue.TIMESTAMP;
+                    candidate.id = firebase.database.ServerValue.TIMESTAMP;
                     return candidates.$add(candidate);
                 }
             },
@@ -98,7 +89,7 @@ angular.module('meetFireBase')
                 return candidates;
             },
             deleteCandidate: function (candidate) {
-                candidates.$remove(candidate);
+                return candidates.$remove(candidate);
                 //var keyToDelete = _.findKey(candidatesObj, {'id': id});
                 //if (keyToDelete) {
                 //    var candidateDataRef = new Firebase(baseUrl + 'candidates/' + keyToDelete);
@@ -123,7 +114,11 @@ angular.module('meetFireBase')
             },
             // Interviewers Functions
             getInterviewers: function () {
-                return $firebaseArray(interviewersDataRef);
+                var interviewers = $firebaseArray(interviewersDataRef);
+                interviewers.$loaded().then(function () {
+                   console.info("interviewers.length: " + interviewers.length);
+                });
+                return interviewers;
             }
         };
 

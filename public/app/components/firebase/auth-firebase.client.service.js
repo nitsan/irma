@@ -1,81 +1,39 @@
 /**
- * Created by nitsa on 07/02/2016.
+ * Created by nitsan on 07/02/2016.
  */
 angular
     .module('meetFireBase')
-    .factory("AuthService", function ($firebaseAuth, fireBaseConfig) {
-        var ref = new Firebase(fireBaseConfig.baseUrl);
-        var authObj = $firebaseAuth(ref);
-        var currentUser = null;
-        //var ref = new Firebase();
-        //return $firebaseAuth(ref);
+    .factory("AuthService", function ($firebaseAuth) {
+            var authObj = $firebaseAuth();
+            var currentUser = null;
 
-        function getUser(){
-            return currentUser;
-        }
-
-        function login(user) {
-            currentUser = user;
-            return authObj.$authWithPassword({
-                email: user.email,
-                password: user.password
-            }, function (error, authData) {
-                if (error) {
-                    console.log("Login error: ", error);
-                    return null;
-                }
-
-                console.log("Logged in as:", authData.uid);
-                return authData;
-            }, {
-                remember: "sessionOnly"
-            });
-        }
-
-        function requireAuth() {
-            return authObj.$requireAuth();
-        }
-
-        function getUserAuth(user) {
-            if (!user) {
-                return authObj.$requireAuth();
-            } else {
-                return authObj.$authWithPassword({
-                    email: user.email,
-                    password: user.password
-                }, function (error, authData) {
-                    if (error) {
-                        console.log("Login error: ", error);
-                    }
-                    console.log("Logged in as:", authData.uid);
-                    return authData;
-                }, {
-                    remember: "sessionOnly"
-                });
+            function getUser() {
+                return currentUser;
             }
 
-            /*        .then(function(error, authData) {
-             if (error) {
-             console.log("Login Failed!", error);
-             return error;
-             } else {
-             console.log("Authenticated successfully with payload:", authData);
-             return authData;
-             }
-             });*/
-        }
+            function login(user) {
+                // remember: "sessionOnly" ??
+                return authObj.$signInWithEmailAndPassword(user.email, user.password)
+                    .then(function (firebaseUser) {
+                        console.info("Logged in as:", firebaseUser.uid);
+                        currentUser = user;
+                        return firebaseUser;
+                    })
+                    .catch(function (error) {
+                        console.warn("Login error: ", error);
+                        return null;
+                    });
+            }
 
-        function logout() {
-            console.log("Bye bye, in logout!");
-            return authObj.$unauth();
-        }
+            function logout() {
+                console.log("Bye bye, in logout!");
+                return authObj.$signOut();
+            }
 
-        return {
-            getUser: getUser,
-            login: login,
-            requireAuth: requireAuth,
-            getUserAuth: getUserAuth,
-            logout: logout
+            return {
+                getUser: getUser,
+                login: login,
+                logout: logout
+            }
         }
-    }
-);
+    );

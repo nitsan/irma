@@ -6,20 +6,14 @@
 
     angular
         .module('meetFireBase', ["firebase"])
-        .run(runBlock)
-        .constant("fireBaseConfig", {baseUrl: 'https://meet-irma.firebaseio.com'});
-
-    runBlock.$inject = ['$rootScope', '$state', 'AuthService'];
-
-    function runBlock($rootScope, $state, AuthService) {
-        $rootScope.$on('$stateChangeStart', function (event, next) {
-            if (next && next.name !== "login") {
-                AuthService.getUserAuth()
-                    .catch(function () {
-                        $state.go("login");
-                    });
-            }
-
+        .constant("fireBaseConfig", {baseUrl: 'https://meet-irma.firebaseio.com'})
+        .config(function () {
+            var config = {
+                apiKey: "AIzaSyDA-c4SNtsBaaf_yj6r_16Ixbfwf-exJ4o",
+                authDomain: "meet-irma.firebaseapp.com",
+                databaseURL: "https://meet-irma.firebaseio.com",
+                storageBucket: "meet-irma.appspot.com"
+            };
+            firebase.initializeApp(config);
         });
-    }
 })();

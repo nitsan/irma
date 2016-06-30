@@ -39,7 +39,7 @@ angular.module('candidates')
                 //candidate.img = images[Math.floor((Math.random() * 7) + 1)];
                 candidate.img = images[count++ % 7]; //todo replace this
                 fireBaseService.saveCandidate(candidate).then(function(){
-                    toastr.success('Candidate "' + candidate.firstName + ' ' + candidate.lastName + '" was save successfully');
+                    toastr.success('Candidate "' + candidate.firstName + ' ' + candidate.lastName + '" was save successfully', "Save");
                 });
             }
         };

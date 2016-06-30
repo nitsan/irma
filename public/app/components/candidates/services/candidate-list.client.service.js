@@ -11,7 +11,7 @@ angular.module('candidates')
                 return candidateList;
             },
             delete: function(candidate){
-                fireBaseService.deleteCandidate(candidate);
+                return fireBaseService.deleteCandidate(candidate);
             },
             getCandidateById: function(id){
                 var defer = $q.defer();

@@ -12,10 +12,10 @@ angular.module('users')
             //$state.go('candidateList');
             AuthService.login(this.user)
                 .then(function (result) {
-                    if (result.token) {
+                    if (result) {
                         $state.go('candidateList');
                     } else {
-                        toastr.error("Cannot login");
+                        toastr.error("Cannot login, bad user or password", "Login");
                     }
                 });
         }

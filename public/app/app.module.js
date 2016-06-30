@@ -17,43 +17,34 @@ angular.module('meet', [
     'users',
     'navbar'
 ]).run(function ($rootScope, $location, AuthService, $state) {
-    //$rootScope.$on('$stateChangeStart', function (event, next) {
-    //    var authorizedRoles = next.data.authorizedRoles;
-    //    if (!AuthService.isAuthorized(authorizedRoles)) {
-    //        event.preventDefault();
-    //        if (AuthService.isAuthenticated()) {
-    //            // user is not allowed
-    //            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-    //        } else {
-    //            // user is not logged in
-    //            $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-    //        }
-    //    }
-    //});
-    $rootScope.$on('$routeChangeError', function (event, next, previous, error) {
-        console.log("In $routeChangeError");
-        if (error === "AUTH_REQUIRED") {
-            console.log("In AUTH_REQUIRED");
-            //$location.path("/home");
-            $state.go("login");
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+        if (!AuthService.getUser() && next.name !== "login"){
+            event.preventDefault();
+            $state.go('login');
         }
     });
 }).config(function ($urlRouterProvider, $stateProvider) {
+    $urlRouterProvider.otherwise('/login');
 
-    $urlRouterProvider.otherwise('/');
+    // $stateProvider
+    //     .state('home', {
+    //         url: '/',
+    //         resolve: {
+    //             nextState: function (AuthService, $state) {
+    //                 console.info("in home state");
+    //                 // var nextState = AuthService.getUser() ? "candidateList" : "login";
+    //                 // console.info("in home state, going to: " + nextState);
+    //                 // $state.go(nextState);
+    //                 return AuthService.getUser() ? "candidateList" : "login";
+    //             }
+    //         },
+    //         controller: function setInitialStateController(AuthService, $state, nextState) {
+    //             console.info("In setInitialStateController");
+    //             // var nextState = AuthService.getUser() ? "candidateList" : "login";
+    //             console.info("in home state, going to: " + nextState);
+    //             return $state.go(nextState);
+    //         }
+    //     });
 
-    $stateProvider
-        .state('home', {
-            url: '/',
-            resolve: {
-                currentAuth: function (AuthService, $state) {
-                    return AuthService.requireAuth().then(function () {
-                        console.log("already logged in, go to login");
-                        $state.go("candidateList");
-                    });
-                }
-            }
-        });
-
-    //$state.go('candidateList');
+    // $state.go('login');
 });
