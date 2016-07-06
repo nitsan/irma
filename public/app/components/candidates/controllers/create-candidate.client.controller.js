@@ -3,7 +3,7 @@
  */
 
 angular.module('candidates')
-    .controller('createCandidateController', function(fireBaseService,$state, candidate, createCandidateService) {
+    .controller('createCandidateController', function(fireBaseService,$state, candidate, createCandidateService, toastr) {
         var required = ['firstName', 'lastName','candidatePhone','candidatePhone','candidateEmail','interviewerName','date'];
         this.candidate = candidate;
         this.interviewers = fireBaseService.getInterviewers();
@@ -23,6 +23,8 @@ angular.module('candidates')
             if (valid){
                 this.createCandidate();
                 $state.go("candidateList");
+            } else {
+                toastr.warning("Candidate is not valid", 'Validation');
             }
         };
 
