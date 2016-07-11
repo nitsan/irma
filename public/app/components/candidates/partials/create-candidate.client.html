@@ -15,21 +15,27 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="id" class="col-sm-4 control-label">*ID</label>
+                <div class="col-sm-7">
+                    <input type="text" id="id" class="form-control" placeholder="Enter candidate ID" ng-model="createCandidateCtrl.candidate.id" ng-disabled="!createCandidateCtrl.isNew">
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="candidatePhone" class="col-sm-4 control-label">*Phone</label>
                 <div class="col-sm-7">
-                    <input type="text" id="candidatePhone" class="form-control" placeholder="Enter interview phone" ng-model="createCandidateCtrl.candidate.candidatePhone">
+                    <input type="tel" id="candidatePhone" class="form-control" placeholder="Enter interview phone" ng-model="createCandidateCtrl.candidate.phone">
                 </div>
             </div>
             <div class="form-group">
                 <label for="candidateEmail" class="col-sm-4 control-label">*Email</label>
                 <div class="col-sm-7">
-                    <input type="email" id="candidateEmail" class="form-control" placeholder="Enter interview email" ng-model="createCandidateCtrl.candidate.candidateEmail">
+                    <input type="email" id="candidateEmail" class="form-control" placeholder="Enter interview email" ng-model="createCandidateCtrl.candidate.email">
                 </div>
             </div>
             <div class="form-group">
                 <label for="interviewerName" class="col-sm-4 control-label">*Interviewer Name</label>
                 <div class="col-sm-7">
-                    <input type="text" id="interviewerName" class="form-control" placeholder="Choose Interviewer Name..." ng-model="createCandidateCtrl.candidate.interviewerName">
+                    <input type="text" id="interviewerName" class="form-control" placeholder="Choose Interviewer Name..." ng-model="createCandidateCtrl.candidate.interviewer">
                 </div>
             </div>
             <!--<ui-select ng-model="createCandidateCtrl.candidate.interviewerName" theme="bootstrap" ng-disabled="disabled">-->

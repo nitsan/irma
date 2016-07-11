@@ -2,7 +2,7 @@
  * Created by Nitsan Zohar on 28/10/2015.
  */
 angular.module('candidates')
-    .factory('createCandidateService', function(fireBaseService, toastr) {
+    .factory('createCandidateService', function ($http) {
         var count = 0;
         var images = [
             'https://media.licdn.com/media/p/4/005/040/1b3/01e38c0.jpg',
@@ -18,9 +18,9 @@ angular.module('candidates')
         var candidate = null;
 
         var createCandidateService = {
-            initCandidate: function(){
+            initCandidate: function () {
                 candidate = {
-                    firstName:null,
+                    firstName: null,
                     lastName: null,
                     candidatePhone: null,
                     candidateEmail: null,
@@ -29,18 +29,26 @@ angular.module('candidates')
                     date: null
                 };
             },
-            getCandidate: function(){
-                return candidate;
-            },
-            setCandidate: function(newCandidate){
-                candidate = newCandidate;
-            },
-            createCandidate: function(candidate) {
-                //candidate.img = images[Math.floor((Math.random() * 7) + 1)];
+            createCandidate: function (candidate) {
                 candidate.img = images[count++ % 7]; //todo replace this
-                fireBaseService.saveCandidate(candidate).then(function(){
-                    toastr.success('Candidate "' + candidate.firstName + ' ' + candidate.lastName + '" was save successfully', "Save");
-                });
+                var userId = "1000";
+                return $http.post('/api/uid/' + userId + '/candidate', {candidate: candidate})
+                    .then(function (response) {
+                        return response.data;
+                    })
+                    .catch(function (err) {
+                        return err;
+                    });
+            },
+            updateCandidate: function (candidate) {
+                var userId = "1000";
+                return $http.put('/api/uid/' + userId + '/candidate', {candidate: candidate})
+                    .then(function (response) {
+                        return response.data;
+                    })
+                    .catch(function (err) {
+                        return err;
+                    });
             }
         };
 

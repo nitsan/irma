@@ -46,12 +46,12 @@ angular.module('meetFireBase')
             //},
             saveCandidate: function (candidate) {
                 // candidate.date = candidate.date.toString(); // firebase cannot save Date object
-                if (candidate.id) {
-                    return candidates.$save(candidate);
-                } else {
-                    candidate.id = firebase.database.ServerValue.TIMESTAMP;
-                    return candidates.$add(candidate);
-                }
+                // if (candidate.id) {
+                //     return candidates.$save(candidate);
+                // } else {
+                //     candidate.id = firebase.database.ServerValue.TIMESTAMP;
+                //     return candidates.$add(candidate);
+                // }
             },
             //getCandidatesOld: function(){
             //    var defer = $q.defer();
@@ -78,14 +78,14 @@ angular.module('meetFireBase')
             //    //return candidates;
             //},
             getCandidates: function () {
-                candidates = $firebaseArray(candidatesDataRef);
-                candidates.$loaded().then(function () {
-                    angular.forEach(candidates, function (candidate, key) {
-                        if (candidate.date) {
-                            candidate.date = new Date(candidate.date);
-                        }
-                    });
-                });
+                // candidates = $firebaseArray(candidatesDataRef);
+                // candidates.$loaded().then(function () {
+                //     angular.forEach(candidates, function (candidate, key) {
+                //         if (candidate.date) {
+                //             candidate.date = new Date(candidate.date);
+                //         }
+                //     });
+                // });
                 return candidates;
             },
             deleteCandidate: function (candidate) {
@@ -114,11 +114,11 @@ angular.module('meetFireBase')
             },
             // Interviewers Functions
             getInterviewers: function () {
-                var interviewers = $firebaseArray(interviewersDataRef);
-                interviewers.$loaded().then(function () {
-                   console.info("interviewers.length: " + interviewers.length);
-                });
-                return interviewers;
+                // var interviewers = $firebaseArray(interviewersDataRef);
+                // interviewers.$loaded().then(function () {
+                //    console.info("interviewers.length: " + interviewers.length);
+                // });
+                // return interviewers;
             }
         };
 

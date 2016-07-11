@@ -3,40 +3,56 @@
  */
 
 angular.module('candidates')
-    .controller('createCandidateController', function(fireBaseService,$state, candidate, createCandidateService, toastr) {
-        var required = ['firstName', 'lastName','candidatePhone','candidatePhone','candidateEmail','interviewerName','date'];
+    .controller('createCandidateController', function (fireBaseService, $state, candidate, createCandidateService, toastr) {
+        this.isNew = !candidate;
+        var required = ['firstName', 'lastName', 'phone', 'email', 'interviewer', 'date'];
         this.candidate = candidate;
         this.interviewers = fireBaseService.getInterviewers();
 
 
-        this.validateForm = function(){
-            console.log("validateForm!");
-            var valid = true;
+        this.validateForm = function () {
+            var validObj = {valid: true};
             for (var i = 0; i < required.length; i++) {
-                if (!this.candidate[required[i]]){
-                    valid = false;
+                if (!this.candidate[required[i]]) {
+                    validObj = {field: required[i], valid: false};
                     break;
                 }
             }
 
-            console.log("valid: " + valid);
-            if (valid){
-                this.createCandidate();
+            if (validObj.valid) {
+                this.saveCandidate();
                 $state.go("candidateList");
             } else {
+                console.warn("Not valid field: " + validObj.field);
                 toastr.warning("Candidate is not valid", 'Validation');
             }
         };
 
-        this.createCandidate = function(){
-            //this.candidate.date = moment(this.candidate.date).format();
-            //this.candidate.time = moment(this.candidate.time).format();
-            //fireBaseService.addCandidate(this.candidate);
-            createCandidateService.createCandidate(this.candidate);
-            createCandidateService.initCandidate();
+        this.saveCandidate = function () {
+            if (this.isNew) {
+                createCandidateService.createCandidate(this.candidate)
+                    .then(function (candidate) {
+                        toastr.success('Candidate "' + candidate.firstName + ' ' + candidate.lastName + '" was save successfully', "Save");
+                        createCandidateService.initCandidate();
+                    })
+                    .catch(function (err) {
+                        console.error("Cannot create user, err: " + err.message);
+                        toastr.error("Cannot create user", "Save Error")
+                    });
+            } else {
+                createCandidateService.updateCandidate(this.candidate)
+                    .then(function (candidate) {
+                        toastr.success('Candidate "' + candidate.firstName + ' ' + candidate.lastName + '" was update successfully', "Save");
+                        createCandidateService.initCandidate();
+                    })
+                    .catch(function (err) {
+                        console.error("Cannot update user, err: " + err.message);
+                        toastr.error("Cannot update user", "Save Error")
+                    });
+            }
         };
 
-        this.cancel = function(){
+        this.cancel = function () {
             $state.go("candidateList");
             createCandidateService.initCandidate();
         }

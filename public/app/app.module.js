@@ -18,10 +18,10 @@ angular.module('meet', [
     'navbar'
 ]).run(function ($rootScope, $location, AuthService, $state) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
-        if (!AuthService.getUser() && next.name !== "login"){
-            event.preventDefault();
-            $state.go('login');
-        }
+        // if (!AuthService.getUser() && next.name !== "login"){
+        //     event.preventDefault();
+        //     $state.go('login');
+        // }
     });
 }).config(function ($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/login');

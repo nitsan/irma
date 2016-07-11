@@ -9,6 +9,11 @@ angular.module('candidates')
     $stateProvider
         .state('candidateList', {
             url: '/candidateList',
+            resolve:{
+                candidateList: function (candidateListService) {
+                    return candidateListService.getCandidates();
+                }
+            },
             views: {
                 'main': {
                     controller: 'candidateListController as candidateListCtrl',
