@@ -3,36 +3,35 @@
 <!DOCTYPE html>
 <html ng-app="meet">
 <head>
-    <!--<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>-->
     <script src="/scripts/angular/angular.min.js"></script>
+    <script src="/scripts/angular-animate/angular-animate.min.js"></script>
     <script src="/scripts/angular-animate/angular-animate.min.js"></script>
     <script src="/scripts/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/scripts/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="/scripts/ui-select/dist/select.min.js"></script>
+    <script src="/scripts/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="/scripts/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 
-    <!-- Firebase -->
-    <script src="/scripts/firebase/firebase.js"></script>
-    <!-- AngularFire -->
-    <script src="/scripts/angularfire/dist/angularfire.min.js"></script>
-
-    <!--<script src="lib/angular-soap/soapclient.js"></script>-->
-    <!--<script src="lib/angular-soap/angular.soap.js"></script>-->
+    <!--core-->
+    <script src="app/components/core/core.client.module.js"></script>
+    <script src="app/components/core/sidebar/sidebar.client.comp.es6"></script>
+    <script src="app/components/core/yes-no-modal/yes-no-modal.client.js"></script>
+    <!--interviewers-->
+    <script src="app/components/Interviewers/interviews.client.module.js"></script>
+    <script src="app/components/Interviewers/Interviewers.service.client.js"></script>
 
     <script src="app/components/candidates/candidate.client.module.js"></script>
-    <script src="app/components/candidates/controllers/candidate-list.client.controller.js"></script>
-    <script src="app/components/candidates/services/candidate-list.client.service.js"></script>
+    <script src="app/components/candidates/components/candidate-list/candidate-list.client.comp.es6"></script>
+    <script src="app/components/candidates/components/candidate-list/candidate-list.client.service.es6"></script>
     <script src="app/components/candidates/config/candidates.client.routes.js"></script>
     <script src="app/components/user-list/user-list.module.js"></script>
     <script src="app/components/user-list/user-list.client.controller.js"></script>
     <script src="app/components/user-list/user-list.client.service.js"></script>
     <script src="app/components/calendar/calendar.client.config.js"></script>
-    <script src="app/components/firebase/config/firebase.client.config.js"></script>
-    <script src="app/components/firebase/firebase.client.service.js"></script>
-    <script src="app/components/firebase/auth-firebase.client.service.js"></script>
 
     <script src="app/components/candidates/config/create-candidate.client.config.js"></script>
-    <script src="app/components/candidates/controllers/create-candidate.client.controller.js"></script>
-    <script src="app/components/candidates/services/create-candidate.client.service.js"></script>
+    <script src="app/components/candidates/components/candidate-editor/candidate-editor.client.service.js"></script>
+    <script src="app/components/candidates/components/candidate-editor/candidate-editor.client.comp.es6"></script>
 
     <script src="app/components/candidate-landing-page/candidate-landing-page.client.config.js"></script>
     <script src="app/components/candidate-landing-page/candidate-landing-page.client.controller.js"></script>
@@ -40,16 +39,19 @@
     <script src="app/components/sms/sms.client.service.js"></script>
 
     <script src="app/app.module.js"></script>
+    <script src="app/components/meet/meet.client.comp.es6"></script>
     <!--users-->
+    <script src="app/components/users/user.client.module.js"></script>
     <script src="app/components/users/users.config.client.js"></script>
     <script src="app/components/users/login-user.controller.client.js"></script>
+    <script src="app/components/users/user.client.service.js"></script>
     <!--navbar-->
-    <script src="app/components/navbar/navbar.module.client.js"></script>
-    <script src="app/components/navbar/navbar.controller.client.js"></script>
+    <script src="app/components/core/navbar/navbar.client.comp.es6"></script>
 
 
     <title>Meet</title>
 
+    <!--<link href="/scripts/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" rel="stylesheet">-->
     <link href="app/assets/css/application.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/scripts/angular-toastr/dist/angular-toastr.min.css" />
     <link href="app/assets/css/style.css" rel="stylesheet">
@@ -68,22 +70,7 @@
     </script>
 </head>
 <body>
-<div class="logo">
-    <img class="meet-logo" src="app/assets/img/meet-logo.png">
-    <!--<h4><a href="index.html">Meet</a></h4>-->
-</div>
-<div ui-view="sidebar"></div>
-<div class="wrap">
-    <header class="page-header">
-        <div ui-view="navbar"></div>
-    </header>
-    <div class="content container">
-        <section ui-view="main"></section>
-    </div>
-    <div class="loader-wrap hiding hide">
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-    </div>
-</div>
+<meet></meet>
 
 <!-- common libraries. required for every page-->
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>

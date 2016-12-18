@@ -1,19 +1,56 @@
 var express = require('express');
 var app = express();
+var port = process.env.PORT || 3001;
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
-var apis = require('./server/apis.js');
-var candidates = require('./server/candidate.server.js');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+var flash = require('connect-flash');
 
-var port = process.env.PORT || 3001;
+if (true) {
+    require('./server/config/config-vars.js');
+}
+var configDB = require('./server/config/database.js');
 
+// configuration ===============================================================
+//process.env.MONGO_USER MONGO_PASSWORD MONGO_URL
+console.log("MONGO_URL: " + process.env.MONGO_URL);
+mongoose.connect(configDB.url);
+require('./server/modules/auto-increment/counters.server.model.js');
+
+// set up our express application
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
-app.use(morgan('dev'));
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json());
-app.use('/', apis);
-app.use('/', candidates);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+    // using store session on MongoDB using express-session + connect
+    store: new MongoStore({
+        url: configDB.url,
+        collection: 'sessions'
+    })
+}));
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+require('./server/config/passport')(passport);
+
+//controllers
+app.use(require('./server/modules/users/user.server.controller.js'));
+app.use(require('./server/modules/core/core.server.controller.js'));
+app.use(require('./server/modules/candidates/candidate.server.controller.js'));
+app.use(require('./server/modules/sms/sms.server.contoller.js'));
 
 app.listen(port);
-console.log('server runs on port: ' + port);
+console.log('The magic happens on port ' + port);

@@ -1,7 +1,7 @@
 /**
  * Created by Nitsan Zohar on 28/10/2015.
  */
-angular.module('candidate-landing-page', []).config(function ($urlRouterProvider,$stateProvider) {
+angular.module('candidate-landing-page', ['interviewers']).config(function ($urlRouterProvider,$stateProvider) {
 
     $stateProvider
         .state('candidateLandingPage', {
@@ -11,8 +11,8 @@ angular.module('candidate-landing-page', []).config(function ($urlRouterProvider
                     controller: 'candidateLandingPageController as candidateLandingPageCtrl',
                     templateUrl: 'candidate-landing-page/candidate-landing-page.client.html',
                     resolve: {
-                        candidate: function($stateParams, fireBaseService){
-                            return fireBaseService.getCandidateById($stateParams.candidateId);
+                        candidate: function($stateParams, candidateListService){
+                            return candidateListService.getCandidateById($stateParams.candidateId);
                         }
                     }
                 }

@@ -1,18 +1,15 @@
 /**
  * Created by nitsa on 05/02/2016.
  */
-angular.module('users', ['meetFireBase'])
+angular.module('user')
     .config(function ($urlRouterProvider, $stateProvider) {
 
         $stateProvider
             .state('login', {
                 url: '/login',
-                views: {
-                    'main': {
-                        controller: 'loginController',
-                        controllerAs: 'loginCtrl',
-                        templateUrl: 'app/components/users/login.html'
-                    }
-                }
+                public: true,
+                controller: 'loginController',
+                controllerAs: 'loginCtrl',
+                templateUrl: 'app/components/users/login.html'
             });
     });

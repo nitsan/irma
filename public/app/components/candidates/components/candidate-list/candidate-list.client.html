@@ -14,7 +14,7 @@
                     </div>
                 </header>
                 <div class="body">
-                    <input type="search" class="candidate-search form-control search-query" placeholder="Search..." ng-model="searchText">
+                    <input type="search" class="candidate-search form-control search-query" placeholder="Search..." ng-model="searchText" ng-model-options="{debounce: 250 }">
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -33,7 +33,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="candidate in candidateListCtrl.candidates | filter:searchText">
+                        <tr ng-repeat="candidate in $ctrl.candidateList | filter:searchText">
                             <td class="hidden-xs">{{$index + 1}}</td>
                             <td>
                                 <img class="img-rounded" ng-src="{{candidate.img}}" alt="" height="50">
@@ -63,37 +63,39 @@
                                 {{candidate.date | date:"HH:mm"}}
                             </td>
                             <td>
-                                <button class="btn btn-default btn-sm" title="Edit Candidate" ng-click="candidateListCtrl.editCandidate(candidate.id)">
+                                <button class="btn btn-default btn-sm" title="Edit Candidate"
+                                        ng-click="$ctrl.editCandidate(candidate)">
                                     Edit
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-default btn-sm">
+                                <button class="btn btn-default btn-sm" ng-disabled="true">
                                     New Meeting
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-sm" title="Delete Candidate" ng-click="candidateListCtrl.deleteCandidate(candidate)">
+                                <button class="btn btn-danger btn-sm" title="Delete Candidate"
+                                        ng-click="$ctrl.deleteCandidate(candidate)">
                                     <i class="fa fa-trash big"></i>
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-success btn-sm" title="Send SMS to Candidate" ng-click="candidateListCtrl.sendSMS(candidate)">
+                                <button class="btn btn-success btn-sm" title="Send SMS to Candidate"
+                                        ng-click="$ctrl.sendSMS(candidate)">
                                     <i class="fa fa-mobile big"></i>
                                 </button>
                             </td>
-
                         </tr>
                         </tbody>
 
                     </table>
                     <div class="clearfix">
                         <div class="pull-right">
-                            <button class="btn btn-default btn-sm">
+                            <button class="btn btn-default btn-sm" ng-disabled="true">
                                 Send to ...
                             </button>
                             <div class="btn-group">
-                                <button class="btn btn-sm btn-inverse dropdown-toggle" data-toggle="dropdown">
+                                <button class="btn btn-sm btn-inverse dropdown-toggle" data-toggle="dropdown" ng-disabled="true">
                                     &nbsp; Clear &nbsp;
                                     <i class="fa fa-caret-down"></i>
                                 </button>

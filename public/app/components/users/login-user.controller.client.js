@@ -1,16 +1,15 @@
 /**
  * Created by nitsa on 05/02/2016.
  */
-angular.module('users')
-    .controller('loginController', function (AuthService, $state, toastr) {
+angular.module('user')
+    .controller('loginController', function ($scope, $state, toastr, userService) {
         this.user = {
             email: null,
             password: null
         };
 
         this.login = function () {
-            //$state.go('candidateList');
-            AuthService.login(this.user)
+            userService.login(this.user)
                 .then(function (result) {
                     if (result) {
                         $state.go('candidateList');

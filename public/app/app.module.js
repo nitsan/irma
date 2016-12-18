@@ -6,45 +6,38 @@ angular.module('meet', [
     'ngAnimate',
     'toastr',
     'ui.router',
+    'core',
     'candidates',
     'user-list',
     'calendar',
-    'meetFireBase',
     'candidate-landing-page',
     'sms',
     'ngSanitize',
     'ui.select',
-    'users',
-    'navbar'
-]).run(function ($rootScope, $location, AuthService, $state) {
-    $rootScope.$on('$stateChangeStart', function (event, next) {
-        // if (!AuthService.getUser() && next.name !== "login"){
-        //     event.preventDefault();
-        //     $state.go('login');
-        // }
+    'user',
+    'interviewers'
+]).run(function ($rootScope, userService, $location, $state) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
+        // console.log(`Go to ${toState.name}, from ${fromState ? fromState.name : 'none'}`);
+        if (!toState.approved) {
+            event.preventDefault();
+            toState.approved = true;
+            userService.getUser()
+                .then(user => {
+                    if (Object.keys(user).length) {
+                        $state.go(toState.public ? 'candidateList' : toState.name, toParams)
+                            .then(() => {
+                                toState.approved = false;
+                            });
+                    } else {
+                        $state.go(toState.public ? toState.name : 'login', toParams)
+                            .then(() => {
+                                toState.approved = false;
+                            });
+                    }
+                });
+        }
     });
-}).config(function ($urlRouterProvider, $stateProvider) {
+}).config(function ($urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
-
-    // $stateProvider
-    //     .state('home', {
-    //         url: '/',
-    //         resolve: {
-    //             nextState: function (AuthService, $state) {
-    //                 console.info("in home state");
-    //                 // var nextState = AuthService.getUser() ? "candidateList" : "login";
-    //                 // console.info("in home state, going to: " + nextState);
-    //                 // $state.go(nextState);
-    //                 return AuthService.getUser() ? "candidateList" : "login";
-    //             }
-    //         },
-    //         controller: function setInitialStateController(AuthService, $state, nextState) {
-    //             console.info("In setInitialStateController");
-    //             // var nextState = AuthService.getUser() ? "candidateList" : "login";
-    //             console.info("in home state, going to: " + nextState);
-    //             return $state.go(nextState);
-    //         }
-    //     });
-
-    // $state.go('login');
 });
