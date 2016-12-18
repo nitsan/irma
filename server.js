@@ -10,10 +10,12 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
+const fs = require("fs");
 
-if (true) {
+if (fs.existsSync('./server/config/config-vars.js')) {
     require('./server/config/config-vars.js');
 }
+
 var configDB = require('./server/config/database.js');
 
 // configuration ===============================================================
