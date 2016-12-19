@@ -1,17 +1,20 @@
 <div class="content container">
-    <button type="button" class="btn btn-warning btn-lg create-btn" data-placement="top" ui-sref="createCandidate"><i class="fa fa-plus"></i> Add Candidate</button>
+    <button ng-if="$ctrl.candidateList.length" type="button" class="btn btn-warning btn-lg create-btn" data-placement="top" ui-sref="createCandidate"><i class="fa fa-plus"></i> Add Candidate</button>
     <h2 class="page-title">Candidate List</h2>
     <div class="row">
         <div class="col-md-12">
-            <section class="widget">
+            <section class="flex-center" ng-if="!$ctrl.candidateList.length">
+                <button type="button" class="btn btn-warning btn-lg" data-placement="top" ui-sref="createCandidate"><i class="fa fa-plus"></i> Add Your First Candidate</button>
+            </section>
+            <section class="widget" ng-if="$ctrl.candidateList.length">
                 <header>
                     <!--<h4>-->
                     <!--Candidate List-->
                     <!--</h4>-->
-                    <div class="widget-controls">
-                        <a href="#"><i class="glyphicon glyphicon-cog"></i></a>
-                        <a data-widgster="close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-                    </div>
+                    <!--<div class="widget-controls">-->
+                        <!--<a href="#"><i class="glyphicon glyphicon-cog"></i></a>-->
+                        <!--<a data-widgster="close" href="#"><i class="glyphicon glyphicon-remove"></i></a>-->
+                    <!--</div>-->
                 </header>
                 <div class="body">
                     <input type="search" class="candidate-search form-control search-query" placeholder="Search..." ng-model="searchText" ng-model-options="{debounce: 250 }">

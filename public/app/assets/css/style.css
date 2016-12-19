@@ -45,3 +45,8 @@ i.big{
         max-width: 100%;
     }
 }
+candidate-list .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
