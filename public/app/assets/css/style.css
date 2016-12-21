@@ -50,3 +50,23 @@ candidate-list .flex-center {
     align-items: center;
     justify-content: center;
 }
+
+candidate-editor .btn-default,
+candidate-editor .btn-default:hover,
+candidate-editor .btn-default:active,
+candidate-editor .btn-default:focus,
+candidate-editor .btn-default:active:hover,
+candidate-editor .btn-default:active:focus {
+    background-color: white;
+    color: #555;
+}
+
+interviewer-list section.widget {
+    padding-bottom: 40px;
+}
+interviewer-list .create-btn {
+    margin-bottom: 10px;
+}
+candidate-editor input[type=search]{
+    background-position-y: 2px
+}

@@ -9,23 +9,25 @@ angular
         controller: candidateListCtrl,
         templateUrl: 'app/components/candidates/components/candidate-list/candidate-list.client.html',
         bindings: {
-            candidateList: '='
+            candidateList: '=',
+            interviewerMap: '<'
         }
     });
 
 /* @ngInject */
-function candidateListCtrl(candidateListService, smsService, $state, toastr) {
+function candidateListCtrl(candidateListService, yesNoModalService, smsService, $state, toastr) {
     let $ctrl = this;
     $ctrl.editCandidate = editCandidate;
     $ctrl.deleteCandidate = deleteCandidate;
     $ctrl.sendSMS = sendSMS;
+    $ctrl.getInterviewers = getInterviewers;
 
     function editCandidate(candidate) {
         $state.go("createCandidate", {candidateId: candidate.candidateId});
     }
 
     function deleteCandidate(candidate) {
-        let modalInstance = candidateListService.createModal('Confirm Delete', `Are you sure you want to delete ${candidate.firstName} ${candidate.lastName}?`);
+        let modalInstance = yesNoModalService.createModal('Confirm Delete', `Are you sure you want to delete ${candidate.firstName} ${candidate.lastName}?`);
 
         modalInstance.result
             .then(approve => {
@@ -39,7 +41,7 @@ function candidateListCtrl(candidateListService, smsService, $state, toastr) {
     }
 
     function sendSMS(candidate) {
-        let modalSms = candidateListService.createModal('Confirm SMS', `Are you sure you want to send SMS ${candidate.firstName} ${candidate.lastName}?`);
+        let modalSms = yesNoModalService.createModal('Confirm SMS', `Are you sure you want to send SMS ${candidate.firstName} ${candidate.lastName}?`);
 
         modalSms.result
             .then(approve => {
@@ -50,5 +52,19 @@ function candidateListCtrl(candidateListService, smsService, $state, toastr) {
                         });
                 }
             });
+    }
+
+    function getInterviewers(candidate) {
+        let interviewers = [];
+        if (candidate.interviewerIds){
+            for (let interviewerId of candidate.interviewerIds) {
+                let interviewer = $ctrl.interviewerMap[interviewerId];
+                if (interviewer) {
+                    interviewers.push(interviewer.displayName);
+                }
+            }
+        }
+
+        return interviewers.toString();
     }
 }

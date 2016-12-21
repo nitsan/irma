@@ -52,6 +52,7 @@ require('./server/config/passport')(passport);
 app.use(require('./server/modules/users/user.server.controller.js'));
 app.use(require('./server/modules/core/core.server.controller.js'));
 app.use(require('./server/modules/candidates/candidate.server.controller.js'));
+app.use(require('./server/modules/interviewer/interviewer.server.controller'));
 app.use(require('./server/modules/sms/sms.server.contoller.js'));
 
 app.listen(port);

@@ -4,13 +4,18 @@
         <!--<a href="index.html"><i class="fa fa-home"></i> <span class="name">Dashboard</span></a>-->
         <!--</li>-->
         <!--<li ng-class="{active:activeClass==='createCandidate'}">-->
-            <!--<a ui-sref="createCandidate" ng-click="activeClass='createCandidate'"><i class="fa fa-plus"></i> <span class="name">Add Candidate</span></a>-->
+        <!--<a ui-sref="createCandidate" ng-click="activeClass='createCandidate'"><i class="fa fa-plus"></i> <span class="name">Add Candidate</span></a>-->
         <!--</li>-->
-        <li ng-class="{active:activeClass==='list'}" ng-init="activeClass='list'">
-            <a ui-sref="candidateList" ng-click="activeClass='list'"><i class="fa fa-home"></i> <span class="name">Candidate List</span></a>
+        <li ng-class="{active:$ctrl.selected==='candidateList'}">
+            <a ui-sref="candidateList"><i class="fa fa-home"></i> <span class="name">Candidate List</span></a>
         </li>
-        <li ng-class="{active:activeClass==='calendar'}">
-            <a ui-sref="calendarPage" ng-click="activeClass='calendar'"><i class="fa fa-calendar"></i> <span class="name">Calendar</span></a>
+        <li ng-class="{active:$ctrl.selected==='interviewerList'}">
+            <a ui-sref="interviewerList"><i class="fa fa-bullhorn"></i> <span
+                    class="name">Interviewers</span></a>
+        </li>
+        <li ng-class="{active:$ctrl.selected==='calendarPage'}">
+            <a ui-sref="calendarPage"><i class="fa fa-calendar"></i> <span
+                    class="name">Calendar</span></a>
         </li>
         <!--<li class="panel ">-->
         <!--<a class="accordion-toggle collapsed" data-toggle="collapse"-->

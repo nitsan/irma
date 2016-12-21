@@ -9,5 +9,20 @@
 angular
     .module('core')
     .component('sideBar', {
+        controller: sideBarCtrl,
         templateUrl: 'app/components/core/sidebar/sidebar.client.html'
     });
+
+/* @ngInject */
+function sideBarCtrl($scope, $state) {
+    let $ctrl = this;
+
+    this.$onInit = () => {
+        $ctrl.selected = $state.current.name;
+        $scope.$on('$stateChangeSuccess', function (event, toState) {
+            if (toState) {
+                $ctrl.selected = toState.name;
+            }
+        });
+    };
+}

@@ -39,31 +39,31 @@
                         <tr ng-repeat="candidate in $ctrl.candidateList | filter:searchText">
                             <td class="hidden-xs">{{$index + 1}}</td>
                             <td>
-                                <img class="img-rounded" ng-src="{{candidate.img}}" alt="" height="50">
+                                <img class="img-rounded" ng-src="{{::candidate.img}}" alt="" height="50">
                             </td>
                             <td>
-                                {{candidate.firstName}}
+                                {{::candidate.firstName}}
                             </td>
                             <td>
-                                {{candidate.lastName}}
+                                {{::candidate.lastName}}
                             </td>
                             <td>
-                                {{candidate.phone}}
+                                {{::candidate.phone}}
                             </td>
                             <td>
-                                {{candidate.email}}
+                                {{::candidate.email}}
                             </td>
                             <td>
-                                {{candidate.interviewer}}
+                                {{::$ctrl.getInterviewers(candidate)}}
                             </td>
                             <td>
-                                {{candidate.team}}
+                                {{::candidate.team}}
                             </td>
                             <td>
-                                {{candidate.date | date:"MM/dd/yyyy"}}
+                                {{::candidate.date | date:"dd/MM/yyyy"}}
                             </td>
                             <td>
-                                {{candidate.date | date:"HH:mm"}}
+                                {{::candidate.date | date:"HH:mm"}}
                             </td>
                             <td>
                                 <button class="btn btn-default btn-sm" title="Edit Candidate"

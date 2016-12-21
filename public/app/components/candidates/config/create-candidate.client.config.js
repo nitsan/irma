@@ -3,7 +3,7 @@
  */
 angular.module('candidates')
     .constant("candidateSettings", {
-        requiredFields: ['firstName', 'lastName', 'phone', 'email', 'interviewer', 'date'],
+        requiredFields: ['firstName', 'lastName', 'phone', 'email', 'date'],
         candidateModel: {
             firstName: null,
             lastName: null,

@@ -86,6 +86,31 @@ exports.updateCandidate = function updateCandidate(userId, candidate) {
     });
 };
 
+exports.removeDeletedInterviewers = function removeDeletedInterviewers(userId, interviewerId) {
+    return new Promise((resolve, reject) => {
+        CandidateModel.find({userId: userId, interviewerIds: {$in: [interviewerId]}}).exec()
+            .then(candidates => {
+                if (!candidates) {
+                    resolve();
+                } else {
+                    let candidatePromiseArray = [];
+                    for (let candidate of candidates) {
+                        candidate.interviewerIds.splice(candidate.interviewerIds.indexOf(interviewerId), 1);
+                        candidatePromiseArray.push(candidate.save())
+                    }
+
+                    Promise.all(candidatePromiseArray)
+                        .then(() => {
+                            resolve();
+                        })
+                        .catch(err => {
+                            reject(err);
+                        })
+                }
+            });
+    });
+};
+
 exports.deleteCandidate = function deleteCandidate(userId, candidateId) {
     return new Promise((resolve, reject) => {
         if (!candidateId) {

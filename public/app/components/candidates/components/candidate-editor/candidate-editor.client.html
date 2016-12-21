@@ -16,13 +16,6 @@
                            ng-model="$ctrl.candidate.lastName">
                 </div>
             </div>
-            <!--<div class="form-group">-->
-                <!--<label for="id" class="col-sm-4 control-label">*ID</label>-->
-                <!--<div class="col-sm-7">-->
-                    <!--<input type="text" id="id" class="form-control" placeholder="Enter candidate ID"-->
-                           <!--ng-model="$ctrl.candidate.id" ng-disabled="!$ctrl.isNew">-->
-                <!--</div>-->
-            <!--</div>-->
             <div class="form-group">
                 <label for="candidatePhone" class="col-sm-4 control-label">*Phone</label>
                 <div class="col-sm-7">
@@ -38,19 +31,24 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="interviewerName" class="col-sm-4 control-label">*Interviewer Name</label>
+                <label class="col-sm-4 control-label">Interviewer</label>
                 <div class="col-sm-7">
-                    <input type="text" id="interviewerName" class="form-control"
-                           placeholder="Choose Interviewer Name..."
-                           ng-model="$ctrl.candidate.interviewer">
+                    <ui-select multiple ng-model="$ctrl.candidate.interviewerIds" theme="bootstrap" ng-disabled="disabled" close-on-select="false">
+                        <ui-select-match placeholder="Choose Interviewers...">{{$item.displayName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="interviewer.interviewerId as interviewer in $ctrl.interviewers | filter: $select.search">
+                            <div>
+                                <span ng-bind-html="interviewer.firstName | highlight: $select.search"></span>
+                                <span ng-bind-html="interviewer.lastName | highlight: $select.search"></span>
+                            </div>
+                            <small>
+                                email: {{interviewer.email}}
+                                phone: {{interviewer.phone}}
+                            </small>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
             </div>
-            <!--<ui-select ng-model="$ctrl.candidate.interviewerName" theme="bootstrap" ng-disabled="disabled">-->
-            <!--<ui-select-match placeholder="Choose Interviewer...">{{$select.selected.interviewerName}}</ui-select-match>-->
-            <!--<ui-select-choices repeat="interviewer in $ctrl.interviewers | propsFilter: {interviewerName: $select.search}">-->
-            <!--<div ng-bind-html="interviewer.interviewerName | highlight: $select.search"></div>-->
-            <!--</ui-select-choices>-->
-            <!--</ui-select>-->
             <div class="form-group">
                 <label for="team" class="col-sm-4 control-label">Team</label>
                 <div class="col-sm-7">

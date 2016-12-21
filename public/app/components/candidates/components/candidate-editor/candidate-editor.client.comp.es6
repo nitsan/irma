@@ -9,7 +9,8 @@ angular
         controller: candidateEditorCtrl,
         templateUrl: 'app/components/candidates/components/candidate-editor/candidate-editor.client.html',
         bindings: {
-            candidate: '<'
+            candidate: '<',
+            interviewers: '<'
         }
     });
 
@@ -35,11 +36,11 @@ function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, 
         let isValid = validateForm();
         if (isValid.valid) {
             candidateEditorService.saveCandidate($ctrl.candidate)
-                .then(candidate=> {
+                .then(candidate => {
                     toastr.success(`Candidate ${candidate.firstName} ${candidate.lastName} was save successfully`, "Save");
                     $state.go("candidateList", {cache: false});
                 })
-                .catch(err=> {
+                .catch(err => {
                     console.error("Cannot create user, err: " + err.message);
                     toastr.error("Cannot save candidate", "Save Error");
                 });
@@ -49,7 +50,6 @@ function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, 
             toastr.warning("Candidate is not valid", 'Validation');
         }
     }
-
 
     function cancel() {
         $state.go("candidateList");
