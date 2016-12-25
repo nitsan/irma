@@ -22,6 +22,19 @@ exports.getInterviewerById = function getInterviewerById(userId, interviewerId) 
     });
 };
 
+exports.getInterviewersByIds = function getInterviewersByIds(userId, interviewersIds) {
+    return new Promise((resolve, reject) => {
+        logger.profile(`Get interviewers [${interviewersIds}] for user: [${userId}]`);
+        InterviewerModel.find({userId: userId, interviewerId: {$in: interviewersIds}}).exec()
+            .then(interviewers => {
+                logger.profile(`Get interviewers [${interviewersIds}] for user: [${userId}]`);
+                resolve(interviewers);
+            }, err => {
+                reject(err);
+            });
+    });
+};
+
 exports.getInterviewers = function getInterviewers(userId) {
     return new Promise((resolve, reject) => {
         logger.profile("Get interviewers for user: " + userId);

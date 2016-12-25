@@ -8,6 +8,15 @@ let userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     userId: String,
+    title: String,
+    phone: {
+        mobile: {
+            type: String
+        },
+        office: {
+            type: String
+        }
+    },
     groupId: String,
     local: {
         email: String,
@@ -32,6 +41,10 @@ let userSchema = mongoose.Schema({
     //     name         : String
     // }
 
+});
+
+userSchema.virtual('displayName').get(function () {
+    return `${this.firstName} ${this.lastName}`;
 });
 
 // methods ======================

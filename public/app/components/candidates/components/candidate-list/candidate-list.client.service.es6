@@ -27,18 +27,18 @@ angular.module('candidates')
             },
             getCandidateById: function (candidateId) {
                 return new Promise((resolve) => {
-                    if (!candidateList.length) {
-                        this.getCandidates()
-                            .then(() => {
-                                resolve(this.findCandidate(candidateId));
-                            });
-                    } else {
+                    if (candidateList.length) {
                         resolve(this.findCandidate(candidateId));
+                    } else {
+                        candidatesPromise = $http.get(`/api/candidate/${candidateId}`)
+                            .then(response => {
+                                resolve(response.data);
+                            });
                     }
                 });
             },
-            findCandidate: function (id) {
-                var candidate = _.find(candidateList, {candidateId: id});
+            findCandidate: function (candidateId) {
+                let candidate =  _.find(candidateList, {candidateId: candidateId});
                 if (candidate && candidate.date) {
                     candidate.date = new Date(candidate.date);
                 }

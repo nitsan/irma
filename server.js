@@ -32,7 +32,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
-    secret: 'keyboard cat',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     // using store session on MongoDB using express-session + connect
@@ -54,6 +54,7 @@ app.use(require('./server/modules/core/core.server.controller.js'));
 app.use(require('./server/modules/candidates/candidate.server.controller.js'));
 app.use(require('./server/modules/interviewer/interviewer.server.controller'));
 app.use(require('./server/modules/sms/sms.server.contoller.js'));
+app.use(require('./server/modules/candidate-landing-page/candidate-landing-page.server.controller.js'));
 
 app.listen(port);
 console.log('The magic happens on port ' + port);

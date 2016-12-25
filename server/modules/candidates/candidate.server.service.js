@@ -11,14 +11,14 @@ let CandidateModel = require('./candidate.server.model.js'),
 exports.getCandidateById = function getCandidateById(userId, candidateId) {
     return new Promise((resolve, reject) => {
         logger.profile(`Get candidate [${candidateId}] for user: [${userId}]`);
-        CandidateModel.findOne({userId: userId, candidateId: candidateId}).lean().exec(function (err, candidate) {
-            logger.profile(`Get candidate [${candidateId}] for user: [${userId}]`);
-            if (err) {
+        CandidateModel.findOne({userId: userId, candidateId: candidateId}).exec()
+            .then(candidate => {
+                logger.profile(`Get candidate [${candidateId}] for user: [${userId}]`);
+                resolve(candidate);
+            })
+            .catch(err => {
                 reject(err);
-            }
-
-            resolve(candidate);
-        });
+            });
     });
 };
 

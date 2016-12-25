@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <section class="widget">
+            <div class="body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-8">
+                        <h4>{{::$ctrl.landingPageData.title}}</h4>
+                        <div ng-bind-html="::$ctrl.landingPageData.bodyText">{{}}</div>
+                        <div class="text-center">
+                            <a class="btn btn-info btn-lg text-center" id="show-info-message"
+                               ng-click="$ctrl.imHere()">I'm
+                                Here!</a>
+                        </div>
+                        <div class="navigation-buttons text-center">
+                            <a ng-if="$ctrl.landingPageData.mapLinks.waze" ng-href="{{::$ctrl.landingPageData.mapLinks.waze}}">
+                                <img class="waze-btn" src="app/assets/img/waze-button.jpg">
+                            </a>
+                            <a ng-if="$ctrl.landingPageData.mapLinks.googleMap" ng-href="{{::$ctrl.landingPageData.mapLinks.googleMap}}">
+                                <img class="google-maps-btn" src="app/assets/img/google-maps-button.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 img-container">
+                        <img class="enter-img" src="app/assets/img/enter1.jpg">
+                        <img class="enter-img" src="app/assets/img/enter2.jpg">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

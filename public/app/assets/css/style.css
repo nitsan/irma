@@ -1,3 +1,6 @@
+body, .content.container {
+     padding-bottom: 0;
+}
 .meet-logo{
     width: 100px;
     left: -23px;
@@ -23,9 +26,8 @@ i.big{
     width: 250px;
 }
 .google-maps-btn{
+    width: 250px;
     border-radius: 10px;
-    height: 90px;
-    display: block;
     margin-top: 10px;
 }
 .navigation-buttons{
@@ -36,7 +38,7 @@ i.big{
 }
 @media (max-width: 768px) {
     .meet-logo{
-     left: 0;
+     left: 3px;
     }
     .wrap {
         margin-left: 0;

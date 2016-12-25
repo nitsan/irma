@@ -27,6 +27,10 @@ let candidateSchema = new Schema({
     updateDate: Date
 });
 
+candidateSchema.virtual('displayName').get(function () {
+    return `${this.firstName} ${this.lastName}`;
+});
+
 let candidatesModel = mongoose.model('Candidates', candidateSchema);
 
 module.exports = candidatesModel;

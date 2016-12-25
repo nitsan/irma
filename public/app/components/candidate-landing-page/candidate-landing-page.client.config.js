@@ -1,22 +1,17 @@
 /**
  * Created by Nitsan Zohar on 28/10/2015.
  */
-angular.module('candidate-landing-page', ['interviewers']).config(function ($urlRouterProvider,$stateProvider) {
-
-    $stateProvider
-        .state('candidateLandingPage', {
-            url: '/candidate-landing-page/:candidateId',
-            views:{
-                'main':{
-                    controller: 'candidateLandingPageController as candidateLandingPageCtrl',
-                    templateUrl: 'candidate-landing-page/candidate-landing-page.client.html',
-                    resolve: {
-                        candidate: function($stateParams, candidateListService){
-                            return candidateListService.getCandidateById($stateParams.candidateId);
-                        }
+angular.module('candidate-landing-page', ['interviewers'])
+    .config(function ($urlRouterProvider, $stateProvider) {
+        $stateProvider
+            .state('candidateLandingPage', {
+                url: '/candidate-landing-page/:userId/:candidateId',
+                public: true,
+                template: '<candidate-landing-page landing-page-data="$resolve.landingPageData"></candidate-landing-page>',
+                resolve: {
+                    landingPageData: function (candidateLandingPageService, $stateParams) {
+                        return candidateLandingPageService.getCandidateLandingPageData($stateParams.userId, $stateParams.candidateId);
                     }
                 }
-            }
-
-        });
-});
+            });
+    });
