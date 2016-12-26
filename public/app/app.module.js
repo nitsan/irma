@@ -15,6 +15,7 @@ angular.module('meet', [
     'ngSanitize',
     'ui.select',
     'user',
+    'signup',
     'interviewers'
 ]).run(function ($rootScope, userService, $location, $state) {
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {

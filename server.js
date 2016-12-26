@@ -21,6 +21,7 @@ var configDB = require('./server/config/database.js');
 // configuration ===============================================================
 //process.env.MONGO_USER MONGO_PASSWORD MONGO_URL
 console.log("MONGO_URL: " + process.env.MONGO_URL);
+mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url);
 require('./server/modules/auto-increment/counters.server.model.js');
 

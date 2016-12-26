@@ -72,3 +72,7 @@ interviewer-list .create-btn {
 candidate-editor input[type=search]{
     background-position-y: 2px
 }
+
+.limit-width {
+    max-width: 700px;
+}

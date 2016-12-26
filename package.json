@@ -1,6 +1,6 @@
 {
   "name": "irma",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Meet 3",
   "main": "server.js",
   "dependencies": {
