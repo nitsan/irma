@@ -1,6 +1,6 @@
 {
   "name": "irma",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Meet 3",
   "main": "server.js",
   "dependencies": {
@@ -32,6 +32,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
+    "textmagic-rest-client": "0.0.5",
     "ui-router": "^1.0.0-alpha.3",
     "ui-select": "^0.18.0",
     "winston": "^2.2.0"

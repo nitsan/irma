@@ -7,9 +7,11 @@ let http = require('http'),
     logger = require('winston'),
     _ = require('lodash'),
     co = require('co'),
-    ip = require('ip');
+    ip = require('ip'),
+    TMClient = require('textmagic-rest-client');
 
-const candidateService = require('./../candidates/candidate.server.service'),
+const smsService = new TMClient(process.env.SMS_USER, process.env.SMS_TOKEN),
+    candidateService = require('./../candidates/candidate.server.service'),
     interviewerService = require('./../interviewer/interviewer.server.service'),
     SmsLogModel = require('./sms-log.server.model');
 
@@ -30,35 +32,45 @@ exports.sendSmsToCandidate = function sendSmsToCandidate(userId, candidate) {
 
 function sendSms(phoneNumbers, smsText, userId, candidateId) {
     return new Promise((resolve, reject) => {
-        let options = {
-            host: process.env.SMS_HOST,
-            path: `/http/sendmsg?api_id=${process.env.SMS_API_ID}&user=${process.env.SMS_USER}&password=${process.env.SMS_PASSWORD}&to=${phoneNumbers}&text=${smsText.replace(/ /g, "%20").replace(/#/g, "%23")}&from=${process.env.SMS_FROM}`
-        };
+        logger.info(`Going to send sms to: ${phoneNumbers}`);
+        smsService.Messages.send({text: smsText, phones: phoneNumbers.toString()}, function (err, response) {
+            if (err) {
+                logger.error('Error on sending sms', err);
+                reject(new Error(`Cannot send sms: ${err.message}`));
+            }
 
-        logger.debug("full path: " + options.host + options.path);
-
-        http.get(options, function (res) {
-            logger.info(`SMS status: ${res.statusCode}, headers: ${JSON.stringify(res.headers)}`);
-            let smsLog = new SmsLogModel({
-                userId: userId,
-                candidateId: candidateId,
-                to: phoneNumbers,
-                text: smsText
-            });
-            smsLog.save()
+            saveSMSLog(userId, candidateId, phoneNumbers, smsText)
                 .then(() => {
-                        resolve();
-                    },
-                    err => {
-                        logger.error(`Cannot save sms log for candidateId: ${candidateId}, err: ${err}`);
-                        reject(err);
-                    });
+                    resolve(response);
+                })
+                .catch(err => {
+                    reject(err);
+                });
         });
     });
 }
 
 function buildSmsText(userId, candidate) {
     return `${serverAddress}/#/candidate-landing-page/${userId}/${candidate.candidateId}`;
+}
+
+function saveSMSLog(userId, candidateId, phoneNumbers, smsText) {
+    return new Promise((resolve, reject) => {
+        let smsLog = new SmsLogModel({
+            userId: userId,
+            candidateId: candidateId,
+            to: phoneNumbers,
+            text: smsText
+        });
+        smsLog.save()
+            .then(() => {
+                    resolve();
+                },
+                err => {
+                    logger.error(`Cannot save sms log for candidateId: ${candidateId}, err: ${err}`);
+                    reject(err);
+                });
+    });
 }
 
 exports.sendSmsImHere = co.wrap(function*(userId, candidateId) {
