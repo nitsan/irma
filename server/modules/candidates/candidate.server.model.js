@@ -25,6 +25,13 @@ let candidateSchema = new Schema({
     date: Date,
     createDate: Date,
     updateDate: Date
+}, {
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true
+    }
 });
 
 candidateSchema.virtual('displayName').get(function () {

@@ -25,7 +25,7 @@ exports.getCandidateById = function getCandidateById(userId, candidateId) {
 exports.getCandidates = function getCandidates(userId) {
     return new Promise((resolve, reject) => {
         logger.profile("Get candidate for user: " + userId);
-        CandidateModel.find({userId: userId}).lean().exec(function (err, candidates) {
+        CandidateModel.find({userId: userId}).exec(function (err, candidates) {
             logger.profile("Get candidate for user: " + userId);
             if (err) {
                 reject(err);
