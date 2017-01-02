@@ -1,0 +1,82 @@
+<h2 class="page-title">Candidate Template</h2>
+<section class="widget">
+    <form class="form-horizontal" role="form">
+        <fieldset>
+            <legend class="section">Address Info</legend>
+            <div class="form-group">
+                <label for="address" class="col-sm-4 control-label">Address</label>
+                <div class="col-sm-7">
+                    <input type="text" id="address" class="form-control" placeholder="Enter work address "
+                           ng-model="$ctrl.candidateTemplate.address.address"
+                           ng-blur="$ctrl.buildPreview()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="waze" class="col-sm-4 control-label">Waze <a href="https://www.waze.com/livemap"
+                                                                         target="_blank"
+                                                                         uib-tooltip="Search in Waze"><i
+                        class="fa fa-link" aria-hidden="true"></i></a></label>
+                <div class="col-sm-7">
+                    <input type="text" id="waze" class="form-control"
+                           placeholder="Enter waze link, e.g., https://www.waze.com/livemap?zoom=17&lat=32.27547&lon=34.86001"
+                           ng-model="$ctrl.candidateTemplate.address.waze">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-sm-4 control-label">Google Map <a href="https://www.google.com/maps"
+                                                                                   target="_blank"
+                                                                                   uib-tooltip="Search in Google Maps"><i
+                        class="fa fa-link" aria-hidden="true"></i></a></label>
+                <div class="col-sm-7">
+                    <input type="text" id="lastName" class="form-control"
+                           placeholder="Enter Google map address, e.g., https://goo.gl/maps/cnxvnu9yiKQ2"
+                           ng-model="$ctrl.candidateTemplate.address.google">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="section">Candidate for Preview</legend>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Candidate for Preview:
+                    <span class="help-block">Only for example</span>
+                </label>
+                <div class="col-sm-7">
+                    <ui-select ng-model="$ctrl.candidate" theme="bootstrap" ng-disabled="disabled"
+                               ng-change="$ctrl.onCandidateChange()">
+                        <ui-select-match placeholder="Choose Candidate...">{{$select.selected.displayName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="candidate in $ctrl.candidates | filter: $select.search">
+                            <div ng-bind-html="candidate.displayName | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </fieldset>
+        <uib-tabset active="active">
+            <uib-tab heading="Text Preview" select="$ctrl.buildPreview()">
+                <!--<pre>{{$ctrl.candidateTemplate.template}}</pre>-->
+                <div ng-bind-html="$ctrl.templatePreview"></div>
+            </uib-tab>
+            <uib-tab heading="Template Editor">
+                <text-angular ng-model="$ctrl.candidateTemplate.template"></text-angular>
+            </uib-tab>
+        </uib-tabset>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <div class="btn-toolbar">
+                        <!--<button type="button" class="btn btn-inverse" ng-click="$ctrl.openPreviewModal()">-->
+                            <!--Preview-->
+                        <!--</button>-->
+                        <button type="submit" class="btn btn-primary" ng-click="$ctrl.saveCandidate()">
+                            Save Candidate Template
+                        </button>
+                        <button type="button" class="btn btn-inverse" ng-click="$ctrl.revertTemplate()">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

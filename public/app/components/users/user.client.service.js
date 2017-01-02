@@ -36,7 +36,6 @@ function userService($http) {
     function getUser() {
         return new Promise((resolve, reject) => {
             if (currentUser.userId) {
-                console.log("local user");
                 resolve(getCurrentUser());
             } else {
                 $http.get('/user')

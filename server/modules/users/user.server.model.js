@@ -41,6 +41,10 @@ let userSchema = mongoose.Schema({
     //     name         : String
     // }
 
+}, {
+    toJSON: {
+        virtuals: true
+    }
 });
 
 userSchema.virtual('displayName').get(function () {

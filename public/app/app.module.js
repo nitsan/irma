@@ -16,6 +16,7 @@ angular.module('meet', [
     'ui.select',
     'user',
     'signup',
+    'candidate-template',
     'interviewers'
 ]).run(function ($rootScope, userService, $location, $state) {
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {

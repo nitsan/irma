@@ -13,6 +13,10 @@
             <a ui-sref="interviewerList"><i class="fa fa-bullhorn"></i> <span
                     class="name">Interviewers</span></a>
         </li>
+        <li ng-class="{active:$ctrl.selected==='candidateTemplate'}">
+            <a ui-sref="candidateTemplate"><i class="fa fa-id-card-o"></i> <span
+                    class="name">Candidate Template</span></a>
+        </li>
         <!--<li ng-class="{active:$ctrl.selected==='calendarPage'}">-->
             <!--<a ui-sref="calendarPage"><i class="fa fa-calendar"></i> <span-->
                     <!--class="name">Calendar</span></a>-->

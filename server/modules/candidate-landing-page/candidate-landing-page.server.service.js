@@ -5,40 +5,78 @@
 
 const co = require('co'),
     logger = require('winston'),
+    _ = require('lodash'),
     moment = require('moment');
 
 const candidateService = require('./../candidates/candidate.server.service'),
     userService = require('./../users/user.server.service'),
-    interviewerService = require('./../interviewer/interviewer.server.service');
+    interviewerService = require('./../interviewer/interviewer.server.service'),
+    CandidateTemplateModel = require('./candidate-template.server.model'),
+    candidateLandingPageConfig = require('./candidate-landing-page.server.config');
+
 
 exports.getCandidateLandingData = co.wrap(function*(userId, candidateId) {
     logger.info(`getCandidateLandingData for candidate: ${candidateId} of user: ${userId}`);
-    let user = yield userService.getUserById(userId);
-    let candidate = yield candidateService.getCandidateById(userId, candidateId);
-    let interviewees = yield interviewerService.getInterviewersByIds(userId, candidate.interviewerIds);
+    let candidateTemplate;
+    try {
+        candidateTemplate = yield CandidateTemplateModel.findOne({userId: userId});
+    } catch (err) {
+        logger.error(`Cannot get candidate template for user: ${userId}, err: ${err}`);
+        yield Promise.reject(err);
+    }
 
-    return {
-        title: `Hello ${candidate.displayName},`,
-        bodyText: `<p>Your interview has been scheduled for ${moment(candidate.date).format("dddd, MMMM Do YYYY, H:mm")} with ${buildIntervieweesString(interviewees)}.</p>
-                   <p>We are located at 5 Giboray Israel St. on the 1st floor Netanya- Poleg Industry area.</p>
-                   <p>Note that the entrance to the office is on the right side of the building- behind the "Vertigo" furniture store.</p>
-                   <p>Please park in one of the nearby parking lots (there is big one next to us). You are welcome to visit our website to learn more about the company and our product: <a href="http://www.startapp.com">www.startapp.com</a>. <a href="https://www.youtube.com/watch?v=mhz6nEui7Zs">https://www.youtube.com/watch?v=mhz6nEui7Zs</a></p> 
-                   <p>If you have any questions, please let me know.</p>
-                   <p>Please confirm receiving this mail.</p>
-                   <p>Good luck,</p>
-                   <br>
-                   <p>${user.displayName} / ${user.title || 'Recruiter'}</p>
-                   <p>M: ${user.phone.mobile || '972.545604111'}  / T: ${user.phone.office || '972.722288372'}</p>`,
-        mapLinks: {
-            waze: 'http://waze.to/?ll=32.27545,34.86001&navigate=yes',
-            googleMap: 'https://www.google.co.il/maps/place/%D7%A9%D7%93%D7%A8%D7%95%D7%AA+%D7%92%D7%99%D7%91%D7%95%D7%A8%D7%99+%D7%99%D7%A9%D7%A8%D7%90%D7%9C+5,+%D7%A0%D7%AA%D7%A0%D7%99%D7%94%E2%80%AD/@32.2754688,34.8621922,17z/data=!3m1!4b1!4m5!3m4!1s0x151d4082c5d4c3'
-        }
-    };
+    candidateTemplate.template = yield fillTemplate(userId, candidateId, candidateTemplate);
+    buildAddresses(candidateTemplate);
+
+    return candidateTemplate;
 });
 
-function buildIntervieweesString(interviewers) {
+const fillTemplate = co.wrap(function*(userId, candidateId, candidateTemplate) {
+    let candidate = yield candidateService.getCandidateById(userId, candidateId);
+    let user = yield userService.getUserById(userId);
+    let interviewees = yield interviewerService.getInterviewersByIds(userId, candidate.interviewerIds);
+
+    return buildTemplate(candidateTemplate.template, candidate, user, candidateTemplate, interviewees);
+});
+
+// call candidate, user, candidateTemplate, interviewees for eval
+function buildTemplate(template, candidate, user, candidateTemplate, interviewees) {
+    let previewText = template;
+
+    _.forEach(candidateLandingPageConfig.TEMPLATE_MAP, (replacement, placeHolder) => {
+        try {
+            previewText = previewText.replace(placeHolder, eval(replacement) || '');
+        } catch (err) {
+            logger.warn(`Cannot replace ${placeHolder} to ${replacement}, error: ${err}`);
+        }
+    });
+
+    return previewText;
+}
+
+function buildAddresses(candidateTemplate) {
+    let wazeAdrees = _.get(candidateTemplate, 'address.waze');
+    if (wazeAdrees) {
+        //wazeAdrees e.g., https://www.waze.com/livemap?zoom=17&lat=32.27547&lon=34.86001
+        let wazeLat = '';
+        const latArr = wazeAdrees.match(/lat=(.*)&/);
+        if (latArr.length > 0) {
+            wazeLat = latArr[1];
+        }
+
+        const lonArr = wazeAdrees.match(/lon=(.*)/);
+        if (lonArr.length > 0) {
+            wazeLat += lonArr[1]
+        }
+
+        candidateTemplate.address.waze = `http://waze.to/?ll=${wazeLat}&navigate=yes`;
+    }
+}
+
+// call this from buildTemplate eval
+function buildIntervieweesString(interviewees) {
     let intervieweesString = '';
-    for (let interviewer of interviewers) {
+    for (let interviewer of interviewees) {
         intervieweesString = intervieweesString.concat(`${interviewer.title || ''} ${interviewer.displayName} and `);
     }
 
@@ -46,3 +84,50 @@ function buildIntervieweesString(interviewers) {
 
     return intervieweesString;
 }
+
+exports.getCandidateTemplate = co.wrap(function*(userId) {
+    let candidateTemplate;
+    try {
+        candidateTemplate = yield CandidateTemplateModel.findOne({userId: userId});
+        if (!candidateTemplate) {
+            candidateTemplate = new CandidateTemplateModel();
+        }
+    } catch (err) {
+        logger.error(`Cannot get candidate template for user: ${userId}, err: ${err}`);
+        yield Promise.reject(err);
+    }
+
+    return candidateTemplate;
+});
+
+exports.saveCandidateTemplate = function saveInterviewer(userId, candidateTemplate) {
+    return candidateTemplate.userId ? updateCandidateTemplate(userId, candidateTemplate) : createCandidateTemplate(userId, candidateTemplate);
+};
+
+const createCandidateTemplate = co.wrap(function*(userId, candidateTemplate) {
+    candidateTemplate.userId = userId;
+    let candidateTemplateObj = new CandidateTemplateModel(candidateTemplate);
+
+    try {
+        yield candidateTemplateObj.save();
+    } catch (err) {
+        logger.error("Cannot save candidate template, err" + err);
+        yield Promise.reject(err);
+    }
+
+    return candidateTemplate;
+});
+
+const updateCandidateTemplate = co.wrap(function*(userId, candidateTemplate) {
+    candidateTemplate.userId = userId;
+    candidateTemplate.updateDate = new Date().getTime();
+
+    try {
+        yield CandidateTemplateModel.findOneAndUpdate({userId: userId}, candidateTemplate);
+    } catch (err) {
+        logger.error("Cannot update candidate template, err" + err);
+        yield Promise.reject(err);
+    }
+
+    return candidateTemplate;
+});
