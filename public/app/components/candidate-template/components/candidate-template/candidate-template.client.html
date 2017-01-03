@@ -62,7 +62,7 @@
         </fieldset>
         <fieldset>
             <legend class="section">SMS Template</legend>
-            <uib-tabset active="active">
+            <uib-tabset active="activeSms">
                 <uib-tab heading="SMS Preview" select="$ctrl.buildSmsPreview()">
                     <pre ng-bind="$ctrl.smsPreview"></pre>
                 </uib-tab>
@@ -73,7 +73,7 @@
         </fieldset>
         <fieldset>
             <legend class="section">Message Template</legend>
-            <uib-tabset active="active">
+            <uib-tabset active="activeMessage">
                 <uib-tab heading="Message Preview" select="$ctrl.buildMessagePreview()">
                     <div ng-bind-html="$ctrl.messagePreview"></div>
                 </uib-tab>
