@@ -100,3 +100,7 @@ candidate-editor input[type=search] {
     width: 600px;
     height: 100px;
 }
+
+a[ng-click]{
+    cursor: pointer;
+}
