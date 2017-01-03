@@ -4,13 +4,15 @@
 angular.module('candidate-template')
     .constant("candidateTemplateSettings", {
         templateMap: {
+            '{{companyName}}': 'candidateTemplate.info.companyName',
             '{{candidate.displayName}}': 'candidate.displayName',
             '{{candidate.date}}': 'moment(candidate.date).format("dddd, MMMM Do YYYY, H:mm")',
             '{{interviewees}}': 'buildIntervieweesString(candidate.interviewerIds, intervieweesMap)',
-            '{{workAddress}}': 'candidateTemplate.address.address',
+            '{{companyAddress}}': 'candidateTemplate.address.address',
             '{{user.displayName}}': 'user.displayName',
             '{{user.title}}': 'user.title',
             '{{user.mobilePhone}}': 'user.phone.mobile',
             '{{user.officePhone}}': 'user.phone.office',
+            '{{link}}': 'function getLink(){return "<-the link will be here->"};getLink()'
         }
     });

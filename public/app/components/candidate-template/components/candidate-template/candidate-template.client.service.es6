@@ -30,7 +30,9 @@ function candidateTemplateService($http, candidateTemplateSettings) {
         let previewText = template;
         _.forEach(candidateTemplateSettings.templateMap, (replacement, placeHolder) => {
             try {
-                previewText = previewText.replace(placeHolder, eval(replacement) || '');
+                if (previewText.includes(placeHolder)) {
+                    previewText = previewText.replace(placeHolder, eval(replacement) || '');
+                }
             } catch (err) {
                 console.warn(`Cannot replace ${placeHolder} to ${replacement}, error: ${err}`);
             }

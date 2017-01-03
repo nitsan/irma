@@ -17,8 +17,9 @@ angular
 /* @ngInject */
 function candidateTemplateCtrl(candidateTemplateService, toastr, $uibModal, candidateLandingPageService) {
     let $ctrl = this;
-    $ctrl.buildPreview = buildPreview;
-    $ctrl.onCandidateChange = onCandidateChange;
+    $ctrl.buildMessagePreview = buildMessagePreview;
+    $ctrl.buildSmsPreview = buildSmsPreview;
+    $ctrl.updatePreviews = updatePreviews;
     $ctrl.saveCandidate = saveCandidate;
     $ctrl.revertTemplate = revertTemplate;
     $ctrl.openPreviewModal = openPreviewModal;
@@ -28,12 +29,17 @@ function candidateTemplateCtrl(candidateTemplateService, toastr, $uibModal, cand
         $ctrl.candidate = $ctrl.candidates[0];
     };
 
-    function buildPreview() {
-        $ctrl.templatePreview = candidateTemplateService.buildPreview($ctrl.candidateTemplate.template, $ctrl.candidate, $ctrl.user, $ctrl.candidateTemplate, $ctrl.intervieweesMap);
+    function buildMessagePreview() {
+        $ctrl.messagePreview = candidateTemplateService.buildPreview($ctrl.candidateTemplate.template.message, $ctrl.candidate, $ctrl.user, $ctrl.candidateTemplate, $ctrl.intervieweesMap);
     }
 
-    function onCandidateChange() {
-        buildPreview();
+    function buildSmsPreview() {
+        $ctrl.smsPreview = candidateTemplateService.buildPreview($ctrl.candidateTemplate.template.sms, $ctrl.candidate, $ctrl.user, $ctrl.candidateTemplate, $ctrl.intervieweesMap);
+    }
+
+    function updatePreviews() {
+        buildSmsPreview();
+        buildMessagePreview();
     }
 
     function saveCandidate() {

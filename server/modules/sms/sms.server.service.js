@@ -7,25 +7,25 @@ let http = require('http'),
     logger = require('winston'),
     _ = require('lodash'),
     co = require('co'),
-    ip = require('ip'),
     TMClient = require('textmagic-rest-client');
 
 const smsService = new TMClient(process.env.SMS_USER, process.env.SMS_TOKEN),
     candidateService = require('./../candidates/candidate.server.service'),
     interviewerService = require('./../interviewer/interviewer.server.service'),
-    SmsLogModel = require('./sms-log.server.model');
-
-const serverAddress = process.env.NODE_ENV === 'prod' ? 'http://meet3.herokuapp.com' : `http://${ip.address()}:${process.env.PORT}`;
+    SmsLogModel = require('./sms-log.server.model'),
+    candidateLandingPageService = require('./../candidate-landing-page/candidate-landing-page.server.service.js');
 
 exports.sendSmsToCandidate = function sendSmsToCandidate(userId, candidate) {
     return new Promise((resolve) => {
         logger.info(`Going to send sms to ${candidate.displayName}`);
 
-        let smsText = buildSmsText(userId, candidate);
-        console.log("smsText: " + smsText);
-        sendSms(candidate.phone, smsText, userId, candidate.candidateId)
-            .then(() => {
-                resolve();
+        candidateLandingPageService.getSmsForCandidate(userId, candidate.candidateId)
+            .then(smsText => {
+                logger.info("smsText: " + smsText);
+                sendSms(candidate.phone, smsText, userId, candidate.candidateId)
+                    .then(() => {
+                        resolve();
+                    });
             });
     });
 };
@@ -48,10 +48,6 @@ function sendSms(phoneNumbers, smsText, userId, candidateId) {
                 });
         });
     });
-}
-
-function buildSmsText(userId, candidate) {
-    return `${serverAddress}/#/candidate-landing-page/${userId}/${candidate.candidateId}`;
 }
 
 function saveSMSLog(userId, candidateId, phoneNumbers, smsText) {

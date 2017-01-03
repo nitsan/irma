@@ -95,3 +95,8 @@ candidate-editor input[type=search] {
 .sidebar {
     width: 200px;
 }
+
+.sms-editor {
+    width: 600px;
+    height: 100px;
+}

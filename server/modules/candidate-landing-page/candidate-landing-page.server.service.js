@@ -6,6 +6,7 @@
 const co = require('co'),
     logger = require('winston'),
     _ = require('lodash'),
+    ip = require('ip'),
     moment = require('moment');
 
 const candidateService = require('./../candidates/candidate.server.service'),
@@ -14,29 +15,49 @@ const candidateService = require('./../candidates/candidate.server.service'),
     CandidateTemplateModel = require('./candidate-template.server.model'),
     candidateLandingPageConfig = require('./candidate-landing-page.server.config');
 
+//need this to eval in buildTemplate
+const serverAddress = process.env.NODE_ENV === 'prod' ? 'http://meet3.herokuapp.com' : `http://${ip.address()}:${process.env.PORT}`;
 
 exports.getCandidateLandingData = co.wrap(function*(userId, candidateId) {
     logger.info(`getCandidateLandingData for candidate: ${candidateId} of user: ${userId}`);
     let candidateTemplate;
     try {
-        candidateTemplate = yield CandidateTemplateModel.findOne({userId: userId});
+        candidateTemplate = yield CandidateTemplateModel.findOne({userId: userId}, {
+            info: 0,
+            'template.sms': 0
+        });
     } catch (err) {
         logger.error(`Cannot get candidate template for user: ${userId}, err: ${err}`);
         yield Promise.reject(err);
     }
 
-    candidateTemplate.template = yield fillTemplate(userId, candidateId, candidateTemplate);
+    candidateTemplate.template.message = yield fillTemplate(userId, candidateId, candidateTemplate, candidateTemplate.template.message);
     buildAddresses(candidateTemplate);
 
     return candidateTemplate;
 });
 
-const fillTemplate = co.wrap(function*(userId, candidateId, candidateTemplate) {
+exports.getSmsForCandidate = co.wrap(function*(userId, candidateId) {
+    let candidateTemplate;
+    try {
+        candidateTemplate = yield CandidateTemplateModel.findOne({userId: userId}, {
+            'template.sms': 1,
+            info: 1
+        });
+    } catch (err) {
+        logger.error(`Cannot get sms text for user: ${userId} and candidate: ${candidateId}, err: ${err}`);
+        yield Promise.reject(err);
+    }
+
+    return yield fillTemplate(userId, candidateId, candidateTemplate, candidateTemplate.template.sms);
+});
+
+const fillTemplate = co.wrap(function*(userId, candidateId, candidateTemplate, templateText) {
     let candidate = yield candidateService.getCandidateById(userId, candidateId);
     let user = yield userService.getUserById(userId);
     let interviewees = yield interviewerService.getInterviewersByIds(userId, candidate.interviewerIds);
 
-    return buildTemplate(candidateTemplate.template, candidate, user, candidateTemplate, interviewees);
+    return buildTemplate(templateText, candidate, user, candidateTemplate, interviewees);
 });
 
 // call candidate, user, candidateTemplate, interviewees for eval
@@ -45,7 +66,9 @@ function buildTemplate(template, candidate, user, candidateTemplate, interviewee
 
     _.forEach(candidateLandingPageConfig.TEMPLATE_MAP, (replacement, placeHolder) => {
         try {
-            previewText = previewText.replace(placeHolder, eval(replacement) || '');
+            if (previewText.includes(placeHolder)) {
+                previewText = previewText.replace(placeHolder, eval(replacement) || '');
+            }
         } catch (err) {
             logger.warn(`Cannot replace ${placeHolder} to ${replacement}, error: ${err}`);
         }

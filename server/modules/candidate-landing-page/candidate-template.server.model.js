@@ -7,10 +7,22 @@ const mongoose = require('mongoose'),
 const candidateLandingPageConfig = require('./candidate-landing-page.server.config');
 
 const candidateTemplateSchema = new Schema({
+    info: {
+        companyName: {
+            type: String
+        }
+    },
     template: {
-        type: String,
-        required: true,
-        default: candidateLandingPageConfig.TEMPLATE_DEFAULT.template
+        message: {
+            type: String,
+            required: true,
+            default: candidateLandingPageConfig.TEMPLATE_DEFAULT.MESSAGE
+        },
+        sms: {
+            type: String,
+            required: true,
+            default: candidateLandingPageConfig.TEMPLATE_DEFAULT.SMS
+        }
     },
     userId: {
         type: String,

@@ -2,13 +2,21 @@
 <section class="widget">
     <form class="form-horizontal" role="form">
         <fieldset>
-            <legend class="section">Address Info</legend>
+            <legend class="section">Company Info</legend>
+            <div class="form-group">
+                <label for="companyName" class="col-sm-4 control-label">Company Name</label>
+                <div class="col-sm-7">
+                    <input type="text" id="companyName" class="form-control" placeholder="Enter work address "
+                           ng-model="$ctrl.candidateTemplate.info.companyName"
+                           ng-blur="$ctrl.updatePreviews()">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="address" class="col-sm-4 control-label">Address</label>
                 <div class="col-sm-7">
                     <input type="text" id="address" class="form-control" placeholder="Enter work address "
                            ng-model="$ctrl.candidateTemplate.address.address"
-                           ng-blur="$ctrl.buildPreview()">
+                           ng-blur="$ctrl.updatePreviews()">
                 </div>
             </div>
             <div class="form-group">
@@ -42,7 +50,7 @@
                 </label>
                 <div class="col-sm-7">
                     <ui-select ng-model="$ctrl.candidate" theme="bootstrap" ng-disabled="disabled"
-                               ng-change="$ctrl.onCandidateChange()">
+                               ng-change="$ctrl.updatePreviews()">
                         <ui-select-match placeholder="Choose Candidate...">{{$select.selected.displayName}}
                         </ui-select-match>
                         <ui-select-choices repeat="candidate in $ctrl.candidates | filter: $select.search">
@@ -52,15 +60,28 @@
                 </div>
             </div>
         </fieldset>
-        <uib-tabset active="active">
-            <uib-tab heading="Text Preview" select="$ctrl.buildPreview()">
-                <!--<pre>{{$ctrl.candidateTemplate.template}}</pre>-->
-                <div ng-bind-html="$ctrl.templatePreview"></div>
-            </uib-tab>
-            <uib-tab heading="Template Editor">
-                <text-angular ng-model="$ctrl.candidateTemplate.template"></text-angular>
-            </uib-tab>
-        </uib-tabset>
+        <fieldset>
+            <legend class="section">SMS Template</legend>
+            <uib-tabset active="active">
+                <uib-tab heading="SMS Preview" select="$ctrl.buildSmsPreview()">
+                    <pre ng-bind="$ctrl.smsPreview"></pre>
+                </uib-tab>
+                <uib-tab heading="SMS Template Editor">
+                    <textarea class="sms-editor" ng-model="$ctrl.candidateTemplate.template.sms"></textarea>
+                </uib-tab>
+            </uib-tabset>
+        </fieldset>
+        <fieldset>
+            <legend class="section">Message Template</legend>
+            <uib-tabset active="active">
+                <uib-tab heading="Message Preview" select="$ctrl.buildMessagePreview()">
+                    <div ng-bind-html="$ctrl.messagePreview"></div>
+                </uib-tab>
+                <uib-tab heading="Message Template Editor">
+                    <text-angular ng-model="$ctrl.candidateTemplate.template.message"></text-angular>
+                </uib-tab>
+            </uib-tabset>
+        </fieldset>
         <div class="form-actions">
             <div class="row">
                 <div class="col-sm-offset-4 col-sm-7">
