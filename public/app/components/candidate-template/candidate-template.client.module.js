@@ -4,8 +4,8 @@
 angular.module('candidate-template', ['textAngular', 'candidates', 'interviewers', 'candidate-landing-page'])
     .config(function ($stateProvider) {
         $stateProvider
-            .state('candidateTemplate', {
-                url: '/candidateTemplate',
+            .state('candidateMessageTemplate', {
+                url: '/candidateMessageTemplate',
                 template: `<candidate-template candidate-template="$resolve.candidateTemplate"
                                                candidates="$resolve.candidates"
                                                user="$resolve.user" 
