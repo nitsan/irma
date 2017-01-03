@@ -20,6 +20,14 @@ angular.module('interviewers')
             sortable: "lastName",
             dataType: "text"
         }, {
+            field: "title",
+            title: "Job Title",
+            filter: {
+                title: "text"
+            },
+            sortable: "title",
+            dataType: "title"
+        }, {
             field: "email",
             title: "Email",
             filter: {

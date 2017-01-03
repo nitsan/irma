@@ -21,6 +21,9 @@ let interviewerSchema = new Schema({
         type: String,
         required: true
     },
+    title: {
+        type: String,
+    },
     email: {
         type: String,
         required: true
