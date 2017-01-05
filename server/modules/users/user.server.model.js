@@ -5,9 +5,18 @@ let mongoose = require('mongoose'),
 
 // define the schema for our user model
 let userSchema = mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    userId: String,
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    userId: {
+        type: String,
+        required: true
+    },
     title: String,
     phone: {
         mobile: {
@@ -19,8 +28,14 @@ let userSchema = mongoose.Schema({
     },
     groupId: String,
     local: {
-        email: String,
-        password: String
+        email: {
+            type: String,
+            required: true
+        },
+        password: {
+            type: String,
+            required: true
+        }
     }
     // facebook         : {
     //     id           : String,

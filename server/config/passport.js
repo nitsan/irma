@@ -1,5 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy,
-    User = require('../modules/users/user.server.model.js');
+    logger = require('winston');
+
+const User = require('../modules/users/user.server.model.js'),
+    Counters = require('./../modules/auto-increment/counters.server.model.js');
 
 
 module.exports = function (passport) {
@@ -72,25 +75,29 @@ module.exports = function (passport) {
 
                         // if there is no user with that email
                         // create the user
+                        Counters.getNextSequence('userId')
+                            .then(userId => {
+                                let newUser = new User({
+                                    firstName: req.body.firstName,
+                                    lastName: req.body.lastName,
+                                    userId: userId,
+                                    local: {
+                                        email: email
+                                    }
+                                });
 
-                        let newUser = new User({
-                            firstName: req.body.firstName,
-                            lastName: req.body.lastName,
-                            userId: -1,
-                            groupId: -1,
-                            local: {
-                                email: email
-                            }
-                        });
+                                // set the user's local credentials
+                                newUser.local.password = newUser.generateHash(password);
 
-                        // set the user's local credentials
-                        newUser.local.password = newUser.generateHash(password);
-
-                        // save the user
-                        newUser.save(function (err) {
-                            if (err)
-                                throw err;
-                            return done(null, newUser);
+                                // save the user
+                                newUser.save(function (err) {
+                                    if (err)
+                                        throw err;
+                                    return done(null, newUser);
+                                });
+                            }).catch(err => {
+                            logger.error(`cannot get userId, err: ${err}`);
+                            throw err;
                         });
                     }
                 });
