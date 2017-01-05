@@ -46,8 +46,8 @@ function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, 
                 });
 
         } else {
-            console.warn("Not valid field: " + validObj.field);
             toastr.warning("Candidate is not valid", 'Validation');
+            console.warn("Not valid field: " + isValid.field);
         }
     }
 
