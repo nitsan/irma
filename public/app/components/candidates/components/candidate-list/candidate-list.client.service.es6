@@ -27,7 +27,9 @@ angular.module('candidates')
             },
             getCandidateById: function (candidateId) {
                 return new Promise((resolve) => {
-                    if (candidateList.length) {
+                    if (!candidateId) {
+                        resolve({});
+                    } else if (candidateList.length) {
                         resolve(this.findCandidate(candidateId));
                     } else {
                         candidatesPromise = $http.get(`/api/candidate/${candidateId}`)
@@ -38,7 +40,7 @@ angular.module('candidates')
                 });
             },
             findCandidate: function (candidateId) {
-                let candidate =  _.find(candidateList, {candidateId: candidateId});
+                let candidate = _.find(candidateList, {candidateId: candidateId});
                 if (candidate && candidate.date) {
                     candidate.date = new Date(candidate.date);
                 }

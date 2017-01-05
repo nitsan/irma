@@ -11,9 +11,18 @@ let candidateSchema = new Schema({
         type: String,
         required: true
     },
-    firstName: String,
-    lastName: String,
-    email: String,
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
     phone: String,
     candidateId: {
         type: String,
