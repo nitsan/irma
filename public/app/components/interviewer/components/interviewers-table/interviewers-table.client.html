@@ -1,0 +1,46 @@
+<button type="button" class="btn btn-warning btn-lg create-btn" data-placement="top" ng-click="$ctrl.addLine()" ng-disabled="$ctrl.originalRow">
+    <i class="fa fa-plus"></i> Add Interviewer
+</button>
+<table ng-table-dynamic="$ctrl.tableParams with $ctrl.cols"
+       class="table table-bordered table-condensed table-hover editable-table demoTable"
+       ng-form="$ctrl.tableForm"
+       disable-filter="!$ctrl.interviewerList.length">
+    <colgroup>
+        <col width="10%"/>
+        <col width="10%"/>
+        <col width="15%"/>
+        <col width="15%"/>
+        <col width="15%"/>
+        <col width="15%"/>
+        <col width="10%"/>
+    </colgroup>
+    <tr ng-repeat="row in $data" ng-form="rowForm">
+        <td ng-repeat="col in $columns" ng-class="rowForm[col.field].$dirty ? 'bg-warning' : ''">
+                    <span ng-if="col.dataType !== 'command' && !row.$isEditing"
+                          class="editable-text">{{row[col.field]}}</span>
+            <div ng-if="col.dataType !== 'command' && row.$isEditing" class="controls"
+                 ng-class="rowForm[col.field].$invalid && rowForm[col.field].$dirty ? 'has-error' : ''"
+                 ng-switch="col.dataType">
+                <input ng-switch-default type="text" name="{{col.field}}" ng-model="row[col.field]"
+                       class="editable-input form-control input-sm" required/>
+                <input ng-switch-when="number" type="number" name="{{col.field}}" ng-model="row[col.field]"
+                       class="editable-input form-control input-sm" required/>
+                <input ng-switch-when="phone" type="phone" name="{{col.field}}" ng-model="row[col.field]"
+                       class="editable-input form-control input-sm" required/>
+            </div>
+            <div ng-if="col.dataType === 'command'">
+                <button class="btn btn-primary btn-sm" ng-click="$ctrl.saveLine(row, rowForm)" ng-if="row.$isEditing"
+                        ng-disabled="rowForm.$pristine || rowForm.$invalid"><span
+                        class="glyphicon glyphicon-ok"></span></button>
+                <button class="btn btn-default btn-sm" ng-click="$ctrl.cancel(row, rowForm)"
+                        ng-if="row.$isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                <button class="btn btn-default btn-sm" ng-click="$ctrl.editRow(row)" ng-if="!row.$isEditing"
+                        ng-disabled="$ctrl.originalRow">
+                    <span class="glyphicon glyphicon-pencil"></span></button>
+                <button class="btn btn-danger btn-sm" ng-click="$ctrl.deleteRow(row)" ng-if="!row.$isEditing"><span
+                        class="glyphicon glyphicon-trash"></span></button>
+            </div>
+
+        </td>
+    </tr>
+</table>

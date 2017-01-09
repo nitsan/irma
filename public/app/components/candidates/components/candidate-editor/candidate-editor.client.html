@@ -19,7 +19,8 @@
             <div class="form-group">
                 <label for="candidatePhone" class="col-sm-4 control-label">*Phone</label>
                 <div class="col-sm-7">
-                    <input type="tel" id="candidatePhone" class="form-control" placeholder="Enter candidate phone. Must start with 972"
+                    <input type="tel" id="candidatePhone" class="form-control"
+                           placeholder="Enter candidate phone. Must start with 972"
                            ng-model="$ctrl.candidate.phone">
                 </div>
             </div>
@@ -31,12 +32,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-4 control-label">Interviewer</label>
+                <label class="col-sm-4 control-label">Interviewer/s</label>
                 <div class="col-sm-7">
-                    <ui-select multiple ng-model="$ctrl.candidate.interviewerIds" theme="bootstrap" ng-disabled="disabled" close-on-select="false">
+                    <ui-select multiple ng-model="$ctrl.candidate.interviewerIds" theme="bootstrap"
+                               ng-disabled="!$ctrl.interviewers.length" close-on-select="false">
                         <ui-select-match placeholder="Choose Interviewers...">{{$item.displayName}}
                         </ui-select-match>
-                        <ui-select-choices repeat="interviewer.interviewerId as interviewer in $ctrl.interviewers | filter: $select.search">
+                        <ui-select-choices
+                                repeat="interviewer.interviewerId as interviewer in $ctrl.interviewers | filter: $select.search">
                             <div>
                                 <span ng-bind-html="interviewer.firstName | highlight: $select.search"></span>
                                 <span ng-bind-html="interviewer.lastName | highlight: $select.search"></span>
@@ -47,6 +50,9 @@
                             </small>
                         </ui-select-choices>
                     </ui-select>
+                </div>
+                <div class="col-sm-1 no-padding-left">
+                    <button class="btn btn-primary" uib-tooltip="Add Interviewers..." ng-click="$ctrl.openIntervieweesModal()"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
             <div class="form-group">

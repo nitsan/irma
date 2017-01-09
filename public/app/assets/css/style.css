@@ -101,6 +101,18 @@ candidate-editor input[type=search] {
     height: 100px;
 }
 
-a[ng-click]{
+a[ng-click] {
     cursor: pointer;
+}
+
+div.ui-select-multiple.ui-select-bootstrap {
+    height: 30px;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}
+
+interviewers-table .table th {
+    color: #666;
 }

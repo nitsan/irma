@@ -41,14 +41,14 @@ function keyColor(d, i) {
 }
 
 function closeNavigation(){
-    var $accordion = $('#side-nav').find('.panel-collapse.in');
-    $accordion.collapse('hide');
-    $accordion.siblings(".accordion-toggle").addClass("collapsed");
-    resetContentMargin();
-    var $sidebar = $('#sidebar');
-    if ($(window).width() < 768 && $sidebar.is('.in')){
-        $sidebar.collapse('hide');
-    }
+    // var $accordion = $('#side-nav').find('.panel-collapse.in');
+    // $accordion.collapse('hide');
+    // $accordion.siblings(".accordion-toggle").addClass("collapsed");
+    // resetContentMargin();
+    // var $sidebar = $('#sidebar');
+    // if ($(window).width() < 768 && $sidebar.is('.in')){
+    //     $sidebar.collapse('hide');
+    // }
 }
 
 function resetContentMargin(){

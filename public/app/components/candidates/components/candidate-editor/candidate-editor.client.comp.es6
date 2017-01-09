@@ -15,10 +15,17 @@ angular
     });
 
 /* @ngInject */
-function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, toastr) {
+function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, toastr, $uibModal, interviewersService) {
     let $ctrl = this;
     $ctrl.saveCandidate = saveCandidate;
     $ctrl.cancel = cancel;
+    $ctrl.openIntervieweesModal = openIntervieweesModal;
+
+    $ctrl.$onInit = function () {
+        if (typeof $ctrl.candidate.date === 'string') {
+            $ctrl.candidate.date = new Date($ctrl.candidate.date);
+        }
+    };
 
     function validateForm() { //todo change this to ng-messages
         let validObj = {valid: true};
@@ -53,5 +60,25 @@ function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, 
 
     function cancel() {
         $state.go("candidateList");
+    }
+
+    function openIntervieweesModal() {
+        let modalInstance = $uibModal.open({
+            component: 'intervieweesModalComponent',
+            size: 'lg',
+            resolve: {
+                interviewees: function () {
+                    return interviewersService.getInterviewers();
+                }
+            }
+        });
+
+        modalInstance.result
+            .then(() => {
+                interviewersService.getInterviewers()
+                    .then(interviewers => {
+                        $ctrl.interviewers = interviewers;
+                    });
+            });
     }
 }
