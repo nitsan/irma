@@ -8,8 +8,6 @@ angular.module('user')
             .state('login', {
                 url: '/login',
                 public: true,
-                controller: 'loginController',
-                controllerAs: 'loginCtrl',
-                templateUrl: 'app/components/users/login.html'
+                template: '<login></login>'
             });
     });
