@@ -1,6 +1,6 @@
 {
   "name": "irma",
-  "version": "2.7.5",
+  "version": "2.7.6",
   "description": "Meet 3",
   "main": "server.js",
   "dependencies": {
@@ -50,7 +50,7 @@
   "devDependencies": {
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js & webpack --config webpack.config.js -p",
     "startDev": "webpack --config webpack.config.js & node server.js",
     "reBuild": "webpack --config webpack.config.js",
     "help": "webpack --help",
