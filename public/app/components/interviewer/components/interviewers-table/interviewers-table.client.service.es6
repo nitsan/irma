@@ -6,6 +6,7 @@
 angular.module('interviewers')
     .factory('interviewersService', interviewersService);
 
+/* @ngInject */
 function interviewersService($http) {
     let interviewersPromise = null;
     let interviewers = null;

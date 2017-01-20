@@ -15,7 +15,7 @@
                                         <i class="fa fa-user"></i>
                                     </span>
                             <input id="email" type="email" class="form-control input-lg"
-                                   ng-model="loginCtrl.user.email"
+                                   ng-model="$ctrl.user.email"
                                    placeholder="Your Email">
                         </div>
                     </div>
@@ -27,13 +27,13 @@
                                         <i class="fa fa-lock"></i>
                                     </span>
                             <input id="password" type="password" class="form-control input-lg"
-                                   ng-model="loginCtrl.user.password"
+                                   ng-model="$ctrl.user.password"
                                    placeholder="Your Password">
                         </div>
                     </div>
                 </fieldset>
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-block btn-lg btn-danger" ng-click="loginCtrl.login()">
+                    <button type="submit" class="btn btn-block btn-lg btn-danger" ng-click="$ctrl.login()">
                         <span class="small-circle"><i class="fa fa-caret-right"></i></span>
                         <small>Sign In</small>
                     </button>

@@ -3,88 +3,13 @@
 <!DOCTYPE html>
 <html ng-app="meet">
 <head>
-    <script src="/scripts/angular/angular.min.js"></script>
-    <script src="/scripts/angular-animate/angular-animate.min.js"></script>
-    <script src="/scripts/angular-animate/angular-animate.min.js"></script>
-    <script src="/scripts/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/scripts/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="/scripts/ui-select/dist/select.min.js"></script>
-    <script src="/scripts/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-    <script src="/scripts/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-    <!--ngTable-->
-    <script src="/scripts/ng-table/bundles/ng-table.js"></script>
-    <link rel="stylesheet" href="/scripts/ng-table/bundles/ng-table.css"/>
-    <!--font-awesome-->
-    <link rel="stylesheet" href="/scripts/font-awesome/css/font-awesome.min.css">
-    <!--textAngular-->
-    <link rel='stylesheet' href='/scripts/textangular/dist/textAngular.css'>
-    <script src='/scripts/textangular/dist/textAngular-rangy.min.js'></script>
-    <script src='/scripts/textangular/dist/textAngular-sanitize.min.js'></script>
-    <script src='/scripts/textangular/dist/textAngular.min.js'></script>
-
-    <!--core-->
-    <script src="app/components/core/core.client.module.js"></script>
-    <script src="app/components/core/sidebar/sidebar.client.comp.es6"></script>
-    <script src="app/components/core/yes-no-modal/yes-no-modal.client.service.es6"></script>
-    <script src="app/components/core/yes-no-modal/yes-no-modal.client.js"></script>
-    <!--signup-->
-    <script src="app/components/signup/signup.client.module.es6"></script>
-    <script src="app/components/signup/signup.client.module.es6"></script>
-    <script src="app/components/signup/signup.client.service.es6"></script>
-    <script src="app/components/signup/signup.client.comp.es6"></script>
-
-    <!--interviewers-->
-    <script src="app/components/interviewer/interviews.client.module.js"></script>
-    <script src="app/components/interviewer/interviewer.client.config.js"></script>
-    <script src="app/components/interviewer/components/interviewer-list/interviewer-list.client.comp.es6"></script>
-    <link href="app/components/interviewer/components/interviewers-modal/interviewers-modal.css" rel="stylesheet">
-    <script src="app/components/interviewer/components/interviewers-modal/interviewers-modal.client.comp.es6"></script>
-    <script src="app/components/interviewer/components/interviewers-table/interviewers-table.client.comp.es6"></script>
-    <script src="app/components/interviewer/components/interviewers-table/interviewers-table.client.service.es6"></script>
-
-    <script src="app/components/candidates/candidate.client.module.js"></script>
-    <script src="app/components/candidates/components/candidate-list/candidate-list.client.comp.es6"></script>
-    <script src="app/components/candidates/components/candidate-list/candidate-list.client.service.es6"></script>
-    <script src="app/components/candidates/config/candidates.client.routes.js"></script>
-    <script src="app/components/user-list/user-list.module.js"></script>
-    <script src="app/components/user-list/user-list.client.controller.js"></script>
-    <script src="app/components/user-list/user-list.client.service.js"></script>
-    <script src="app/components/calendar/calendar.client.config.js"></script>
-
-    <script src="app/components/candidates/config/create-candidate.client.config.js"></script>
-    <script src="app/components/candidates/components/candidate-editor/candidate-editor.client.service.js"></script>
-    <script src="app/components/candidates/components/candidate-editor/candidate-editor.client.comp.es6"></script>
-
-    <script src="app/components/candidate-landing-page/candidate-landing-page.client.config.js"></script>
-    <script src="app/components/candidate-landing-page/components/candidate-landing-page/candidate-landing-page.client.comp.es6"></script>
-    <script src="app/components/candidate-landing-page/components/candidate-landing-page/candidate-landing-page.client.service.js"></script>
-    <script src="app/components/sms/sms.client.service.js"></script>
-
-    <script src="app/app.module.js"></script>
-    <script src="app/components/meet/meet.client.comp.es6"></script>
-    <!--users-->
-    <script src="app/components/users/user.client.module.js"></script>
-    <script src="app/components/users/users.routes.client.js"></script>
-    <script src="app/components/users/login-user.client..comp.es6"></script>
-    <script src="app/components/users/user.client.service.js"></script>
-    <!--navbar-->
-    <script src="app/components/core/navbar/navbar.client.comp.es6"></script>
-
-    <!--candidate-template-->
-    <script src="app/components/candidate-template/candidate-template.client.module.js"></script>
-    <script src="app/components/candidate-template/candidate-template.client.config.js"></script>
-    <script src="app/components/candidate-template/components/candidate-template/candidate-template.client.service.es6"></script>
-    <script src="app/components/candidate-template/components/candidate-template/candidate-template.client.comp.es6"></script>
-    <script src="app/components/candidate-template/components/template-modal/template-modal.client.comp.es6"></script>
-
-
+    <script src="dist/bundle.js"></script>
     <title>Meet</title>
-
     <!--<link href="/scripts/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" rel="stylesheet">-->
-    <link href="app/assets/css/application.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/scripts/angular-toastr/dist/angular-toastr.min.css" />
-    <link href="app/assets/css/style.min.css" rel="stylesheet">
-    <link href="/scripts/ui-select/dist/select.min.css" rel="stylesheet">
+    <!--<link href="app/assets/css/application.min.css" rel="stylesheet">-->
+    <!--<link rel="stylesheet" href="/scripts/angular-toastr/dist/angular-toastr.min.css" />-->
+    <!--<link href="app/assets/css/style.min.css" rel="stylesheet">-->
+    <!--<link href="/scripts/ui-select/dist/select.min.css" rel="stylesheet">-->
 
     <link rel="shortcut icon" href="app/assets/img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,76 +27,76 @@
 <meet></meet>
 
 <!-- common libraries. required for every page-->
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>-->
 <!--<script src="lib/jquery-pjax/jquery.pjax.js"></script>-->
 <!--<script src="lib/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>-->
 <!--<script src="lib/widgster/widgster.js"></script>-->
-<script src="/scripts/lodash/lodash.min.js"></script>
+<!--<script src="/scripts/lodash/lodash.min.js"></script>-->
 
 <!-- common application js -->
-<script src="app/assets/js/app.js"></script>
-<script src="app/assets/js/settings.js"></script>
+<!--<script src="app/assets/js/app.js"></script>-->
+<!--<script src="app/assets/js/settings.js"></script>-->
 
 <!-- common templates -->
-<script type="text/template" id="settings-template">
-    <div class="setting clearfix">
-        <div>Background</div>
-        <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-            <% dark = background == 'dark'; light = background == 'light';%>
-            <button type="button" data-value="dark" class="btn btn-sm btn-default <%= dark? 'active' : '' %>">Dark
-            </button>
-            <button type="button" data-value="light" class="btn btn-sm btn-default <%= light? 'active' : '' %>">Light
-            </button>
-        </div>
-    </div>
-    <div class="setting clearfix">
-        <div>Sidebar on the</div>
-        <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-            <% onRight = sidebar == 'right'%>
-            <button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left
-            </button>
-            <button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">
-                Right
-            </button>
-        </div>
-    </div>
-    <div class="setting clearfix">
-        <div>Sidebar</div>
-        <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-            <% display = displaySidebar%>
-            <button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show
-            </button>
-            <button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide
-            </button>
-        </div>
-    </div>
-    <div class="setting clearfix">
-        <div>White Version</div>
-        <div>
-            <a href="../transparent/index.html" class="btn btn-sm btn-default">&nbsp; Switch &nbsp; <i
-                    class="fa fa-angle-right"></i></a>
-        </div>
-    </div>
-</script>
+<!--<script type="text/template" id="settings-template">-->
+    <!--<div class="setting clearfix">-->
+        <!--<div>Background</div>-->
+        <!--<div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">-->
+            <!--<% dark = background == 'dark'; light = background == 'light';%>-->
+            <!--<button type="button" data-value="dark" class="btn btn-sm btn-default <%= dark? 'active' : '' %>">Dark-->
+            <!--</button>-->
+            <!--<button type="button" data-value="light" class="btn btn-sm btn-default <%= light? 'active' : '' %>">Light-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="setting clearfix">-->
+        <!--<div>Sidebar on the</div>-->
+        <!--<div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">-->
+            <!--<% onRight = sidebar == 'right'%>-->
+            <!--<button type="button" data-value="left" class="btn btn-sm btn-default <%= onRight? '' : 'active' %>">Left-->
+            <!--</button>-->
+            <!--<button type="button" data-value="right" class="btn btn-sm btn-default <%= onRight? 'active' : '' %>">-->
+                <!--Right-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="setting clearfix">-->
+        <!--<div>Sidebar</div>-->
+        <!--<div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">-->
+            <!--<% display = displaySidebar%>-->
+            <!--<button type="button" data-value="true" class="btn btn-sm btn-default <%= display? 'active' : '' %>">Show-->
+            <!--</button>-->
+            <!--<button type="button" data-value="false" class="btn btn-sm btn-default <%= display? '' : 'active' %>">Hide-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="setting clearfix">-->
+        <!--<div>White Version</div>-->
+        <!--<div>-->
+            <!--<a href="../transparent/index.html" class="btn btn-sm btn-default">&nbsp; Switch &nbsp; <i-->
+                    <!--class="fa fa-angle-right"></i></a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</script>-->
 
-<script type="text/template" id="sidebar-settings-template">
-    <% auto = sidebarState == 'auto'%>
-    <% if (auto) {%>
-    <button type="button"
-            data-value="icons"
-            class="btn-icons btn btn-transparent btn-sm">Icons
-    </button>
-    <button type="button"
-            data-value="auto"
-            class="btn-auto btn btn-transparent btn-sm">Auto
-    </button>
-    <%} else {%>
-    <button type="button"
-            data-value="auto"
-            class="btn btn-transparent btn-sm">Auto
-    </button>
-    <% } %>
-</script>
+<!--<script type="text/template" id="sidebar-settings-template">-->
+    <!--<% auto = sidebarState == 'auto'%>-->
+    <!--<% if (auto) {%>-->
+    <!--<button type="button"-->
+            <!--data-value="icons"-->
+            <!--class="btn-icons btn btn-transparent btn-sm">Icons-->
+    <!--</button>-->
+    <!--<button type="button"-->
+            <!--data-value="auto"-->
+            <!--class="btn-auto btn btn-transparent btn-sm">Auto-->
+    <!--</button>-->
+    <!--<%} else {%>-->
+    <!--<button type="button"-->
+            <!--data-value="auto"-->
+            <!--class="btn btn-transparent btn-sm">Auto-->
+    <!--</button>-->
+    <!--<% } %>-->
+<!--</script>-->
 
 <!-- page specific scripts -->
 <!-- page libs -->
@@ -207,7 +132,7 @@
         <!--</div>-->
     <!--</div>-->
 <!--</script>-->
-<script src="/scripts/moment/min/moment.min.js"></script>
+<!--<script src="/scripts/moment/min/moment.min.js"></script>-->
 <!--<script src="lib/jquery-ui/ui/core.js"></script>-->
 <!--<script src="lib/jquery-ui/ui/widget.js"></script>-->
 <!--<script src="lib/jquery-ui/ui/mouse.js"></script>-->
@@ -216,6 +141,6 @@
 <!-- page application js -->
 <!--<script src="js/component-calendar.js"></script>-->
 <!--toastr-->
-<script src="/scripts/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+<!--<script src="/scripts/angular-toastr/dist/angular-toastr.tpls.min.js"></script>-->
 </body>
 </html>

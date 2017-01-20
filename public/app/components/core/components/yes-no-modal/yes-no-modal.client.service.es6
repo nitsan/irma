@@ -2,6 +2,7 @@
 angular.module('core')
     .factory('yesNoModalService', yesNoModalService);
 
+/* @ngInject */
 function yesNoModalService($uibModal) {
     let service = {
         createModal: createModal

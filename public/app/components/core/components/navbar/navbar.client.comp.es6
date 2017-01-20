@@ -10,7 +10,7 @@ angular
     .module('core')
     .component('navBar', {
         controller: navBarCtrl,
-        templateUrl: 'app/components/core/navbar/navbar.client.html'
+        templateUrl: 'app/components/core/components/navbar/navbar.client.html'
 
     });
 

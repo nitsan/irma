@@ -4,7 +4,7 @@
 'use strict';
 
 angular
-    .module('meet')
+    .module('core')
     .component('meet', {
         controller: meetCtrl,
         template: `

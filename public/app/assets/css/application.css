@@ -14601,7 +14601,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
   font-size: 1px;
   text-decoration: none;
   border: 0;
-  background: url("select2.png") right top no-repeat;
+  /*background: url("select2.png") right top no-repeat;*/
   cursor: pointer;
   outline: 0;
 }
@@ -14712,7 +14712,7 @@ html[dir="rtl"] .select2-container .select2-choice .select2-arrow {
   display: block;
   width: 100%;
   height: 100%;
-  background: url("select2.png") no-repeat 0 1px;
+  /*background: url("select2.png") no-repeat 0 1px;*/
 }
 
 /* line 217, ../../../bower_components/select2/select2.css */
@@ -14746,30 +14746,30 @@ html[dir="rtl"] .select2-container .select2-choice .select2-arrow b {
   border-radius: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
-  background: #fff url("select2.png") no-repeat 100% -22px;
-  background: url("select2.png") no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
-  background: url("select2.png") no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("select2.png") no-repeat 100% -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("select2.png") no-repeat 100% -22px, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;
+  /*background: #fff url("select2.png") no-repeat 100% -22px;*/
+  /*background: url("select2.png") no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));*/
+  /*background: url("select2.png") no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("select2.png") no-repeat 100% -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("select2.png") no-repeat 100% -22px, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;*/
 }
 
 /* line 258, ../../../bower_components/select2/select2.css */
 html[dir="rtl"] .select2-search input {
   padding: 4px 5px 4px 20px;
-  background: #fff url("select2.png") no-repeat -37px -22px;
-  background: url("select2.png") no-repeat -37px -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
-  background: url("select2.png") no-repeat -37px -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("select2.png") no-repeat -37px -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("select2.png") no-repeat -37px -22px, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;
+  /*background: #fff url("select2.png") no-repeat -37px -22px;*/
+  /*background: url("select2.png") no-repeat -37px -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));*/
+  /*background: url("select2.png") no-repeat -37px -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("select2.png") no-repeat -37px -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("select2.png") no-repeat -37px -22px, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;*/
 }
 
 /* line 268, ../../../bower_components/select2/select2.css */
 .select2-search input.select2-active {
-  background: #fff url("select2-spinner.gif") no-repeat 100%;
-  background: url("select2-spinner.gif") no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
-  background: url("select2-spinner.gif") no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("select2-spinner.gif") no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("select2-spinner.gif") no-repeat 100%, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;
+  /*background: #fff url("select2-spinner.gif") no-repeat 100%;*/
+  /*background: url("select2-spinner.gif") no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));*/
+  /*background: url("select2-spinner.gif") no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("select2-spinner.gif") no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("select2-spinner.gif") no-repeat 100%, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;*/
 }
 
 /* line 276, ../../../bower_components/select2/select2.css */
@@ -14984,7 +14984,7 @@ disabled look for disabled choices in the results dropdown
 
 /* line 441, ../../../bower_components/select2/select2.css */
 .select2-more-results.select2-active {
-  background: #f4f4f4 url("select2-spinner.gif") no-repeat 100%;
+  /*background: #f4f4f4 url("select2-spinner.gif") no-repeat 100%;*/
 }
 
 /* line 445, ../../../bower_components/select2/select2.css */
@@ -15094,7 +15094,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices li {
 
 /* line 541, ../../../bower_components/select2/select2.css */
 .select2-container-multi .select2-choices .select2-search-field input.select2-active {
-  background: #fff url("select2-spinner.gif") no-repeat 100% !important;
+  /*background: #fff url("select2-spinner.gif") no-repeat 100% !important;*/
 }
 
 /* line 545, ../../../bower_components/select2/select2.css */
@@ -15154,7 +15154,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice
   top: 4px;
   font-size: 1px;
   outline: none;
-  background: url("select2.png") right top no-repeat;
+  /*background: url("select2.png") right top no-repeat;*/
 }
 
 /* line 603, ../../../bower_components/select2/select2.css */
@@ -15251,7 +15251,7 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
   .select2-search-choice-close,
   .select2-container .select2-choice abbr,
   .select2-container .select2-choice .select2-arrow b {
-    background-image: url("select2x2.png") !important;
+    /*background-image: url("select2x2.png") !important;*/
     background-repeat: no-repeat !important;
     background-size: 60px 40px !important;
   }
@@ -16435,7 +16435,7 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
   width: 100px;
   height: 100px;
   cursor: crosshair;
-  background-image: url("../img/bootstrap-colorpicker/saturation.png");
+  /*background-image: url("../img/bootstrap-colorpicker/saturation.png");*/
 }
 
 /* line 19, ../../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css */
@@ -16491,13 +16491,13 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
 
 /* line 66, ../../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css */
 .colorpicker-hue {
-  background-image: url("../img/bootstrap-colorpicker/hue.png");
+  /*background-image: url("../img/bootstrap-colorpicker/hue.png");*/
 }
 
 /* line 70, ../../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css */
 .colorpicker-alpha {
   display: none;
-  background-image: url("../img/bootstrap-colorpicker/alpha.png");
+  /*background-image: url("../img/bootstrap-colorpicker/alpha.png");*/
 }
 
 /* line 75, ../../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css */
@@ -16579,7 +16579,7 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
   height: 10px;
   margin-top: 5px;
   clear: both;
-  background-image: url("../img/bootstrap-colorpicker/alpha.png");
+  /*background-image: url("../img/bootstrap-colorpicker/alpha.png");*/
   background-position: 0 100%;
 }
 
@@ -16671,12 +16671,12 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
 
 /* line 223, ../../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css */
 .colorpicker.colorpicker-horizontal .colorpicker-hue {
-  background-image: url("../img/bootstrap-colorpicker/hue-horizontal.png");
+  /*background-image: url("../img/bootstrap-colorpicker/hue-horizontal.png");*/
 }
 
 /* line 227, ../../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css */
 .colorpicker.colorpicker-horizontal .colorpicker-alpha {
-  background-image: url("../img/bootstrap-colorpicker/alpha-horizontal.png");
+  /*background-image: url("../img/bootstrap-colorpicker/alpha-horizontal.png");*/
 }
 
 /* line 231, ../../../bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css */
@@ -19884,12 +19884,12 @@ svg .title {
  */
 /* line 143, ../../src/sass/_override-custom-libs.scss */
 .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
-  background-image: url("../lib/select2/select2.png");
+  /*background-image: url("../lib/select2/select2.png");*/
 }
 @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
   /* line 143, ../../src/sass/_override-custom-libs.scss */
   .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
-    background-image: url("../lib/select2/select2x2.png") !important;
+    /*background-image: url("../lib/select2/select2x2.png") !important;*/
   }
 }
 
@@ -19901,21 +19901,21 @@ svg .title {
 
 /* line 155, ../../src/sass/_override-custom-libs.scss */
 .select2-search input.select2-active {
-  background: #fff url("../lib/select2/select2-spinner.gif") no-repeat 100%;
-  background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
-  background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;
+  /*background: #fff url("../lib/select2/select2-spinner.gif") no-repeat 100%;*/
+  /*background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));*/
+  /*background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);*/
+  /*background: url("../lib/select2/select2-spinner.gif") no-repeat 100%, linear-gradient(to bottom, #ffffff 85%, #eeeeee 99%) 0 0;*/
 }
 
 /* line 163, ../../src/sass/_override-custom-libs.scss */
 .select2-more-results.select2-active {
-  background: #f4f4f4 url("../lib/select2/select2-spinner.gif") no-repeat 100%;
+  /*background: #f4f4f4 url("../lib/select2/select2-spinner.gif") no-repeat 100%;*/
 }
 
 /* line 167, ../../src/sass/_override-custom-libs.scss */
 .select2-container-multi .select2-choices .select2-search-field input.select2-active {
-  background: #fff url("../lib/select2/select2-spinner.gif") no-repeat 100% !important;
+  /*background: #fff url("../lib/select2/select2-spinner.gif") no-repeat 100% !important;*/
 }
 
 /**
@@ -20012,28 +20012,28 @@ svg .title {
  */
 /* line 290, ../../src/sass/_override-custom-libs.scss */
 .colorpicker-saturation {
-  background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/saturation.png");
+  /*background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/saturation.png");*/
 }
 
 /* line 294, ../../src/sass/_override-custom-libs.scss */
 .colorpicker-hue {
-  background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/hue.png");
+  /*background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/hue.png");*/
 }
 
 /* line 298, ../../src/sass/_override-custom-libs.scss */
 .colorpicker-alpha,
 .colorpicker-color {
-  background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/alpha.png");
+  /*background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/alpha.png");*/
 }
 
 /* line 303, ../../src/sass/_override-custom-libs.scss */
 .colorpicker.colorpicker-horizontal .colorpicker-hue {
-  background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/hue-horizontal.png");
+  /*background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/hue-horizontal.png");*/
 }
 
 /* line 307, ../../src/sass/_override-custom-libs.scss */
 .colorpicker.colorpicker-horizontal .colorpicker-alpha {
-  background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/alpha-horizontal.png");
+  /*background-image: url("../lib/mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/alpha-horizontal.png");*/
 }
 
 /**
@@ -20374,33 +20374,6 @@ a.fc-event {
   border-top-right-radius: 3px;
 }
 
-/***********************************/
-/**          Datatables           **/
-/***********************************/
-/* line 608, ../../src/sass/_override-custom-libs.scss */
-table.dataTable thead .sorting {
-  background: url("../lib/datatables/media/images/sort_both.png") no-repeat center right;
-}
-
-/* line 611, ../../src/sass/_override-custom-libs.scss */
-table.dataTable thead .sorting_asc {
-  background: url("../lib/datatables/media/images/sort_asc.png") no-repeat center right;
-}
-
-/* line 614, ../../src/sass/_override-custom-libs.scss */
-table.dataTable thead .sorting_desc {
-  background: url("../lib/datatables/media/images/sort_desc.png") no-repeat center right;
-}
-
-/* line 617, ../../src/sass/_override-custom-libs.scss */
-table.dataTable thead .sorting_asc_disabled {
-  background: url("../lib/datatables/media/images/sort_asc_disabled.png") no-repeat center right;
-}
-
-/* line 620, ../../src/sass/_override-custom-libs.scss */
-table.dataTable thead .sorting_desc_disabled {
-  background: url("../lib/datatables/media/images/sort_desc_disabled.png") no-repeat center right;
-}
 
 /* line 624, ../../src/sass/_override-custom-libs.scss */
 .dataTables_wrapper .dataTables_paginate {
@@ -20459,7 +20432,7 @@ input[type=search], input.search {
 input[type=search].input-transparent, input.search.input-transparent {
   border: none;
   color: #666;
-  background: url(../img/search-white.png) 5px 5px no-repeat #ffffff;
+  /*background: url(../img/search-white.png) 5px 5px no-repeat #ffffff;*/
 }
 /* line 103, ../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
 input[type=search].input-transparent::-moz-placeholder, input.search.input-transparent::-moz-placeholder {
@@ -23892,31 +23865,6 @@ table.table thead .sorting_asc_disabled,
 table.table thead .sorting_desc_disabled {
   cursor: pointer;
   *cursor: hand;
-}
-
-/* line 92, ../../src/sass/_widgets.scss */
-table.table thead .sorting {
-  background: url("../lib/datatables/media/images/sort_both.png") no-repeat center right;
-}
-
-/* line 93, ../../src/sass/_widgets.scss */
-table.table thead .sorting_asc {
-  background: url("../lib/datatables/media/images/sort_asc.png") no-repeat center right;
-}
-
-/* line 94, ../../src/sass/_widgets.scss */
-table.table thead .sorting_desc {
-  background: url("../lib/datatables/media/images/sort_desc.png") no-repeat center right;
-}
-
-/* line 96, ../../src/sass/_widgets.scss */
-table.table thead .sorting_asc_disabled {
-  background: url("../lib/datatables/media/images/sort_asc_disabled.png") no-repeat center right;
-}
-
-/* line 97, ../../src/sass/_widgets.scss */
-table.table thead .sorting_desc_disabled {
-  background: url("../lib/datatables/media/images/sort_desc_disabled.png") no-repeat center right;
 }
 
 /* line 99, ../../src/sass/_widgets.scss */

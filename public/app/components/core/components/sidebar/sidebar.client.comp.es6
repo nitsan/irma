@@ -10,7 +10,7 @@ angular
     .module('core')
     .component('sideBar', {
         controller: sideBarCtrl,
-        templateUrl: 'app/components/core/sidebar/sidebar.client.html'
+        templateUrl: 'app/components/core/components/sidebar/sidebar.client.html'
     });
 
 /* @ngInject */

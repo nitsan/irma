@@ -1,6 +1,8 @@
 /**
  * Created by Nitsan on 02/01/2017.
  */
+require('./interviewers-modal.css');
+
 angular.module('interviewers')
     .component('intervieweesModalComponent', {
         template: `

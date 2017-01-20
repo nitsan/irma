@@ -4,6 +4,7 @@
 angular.module('candidate-landing-page')
     .factory('candidateLandingPageService', candidateLandingPageService);
 
+/* @ngInject */
 function candidateLandingPageService(smsService, $http) {
 
     let service = {

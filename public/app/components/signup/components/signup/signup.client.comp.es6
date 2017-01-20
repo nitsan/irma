@@ -5,7 +5,7 @@ angular
     .module('signup')
     .component('signUp', {
         controller: signUpCtrl,
-        templateUrl: 'app/components/signup/signup.client.html'
+        templateUrl: 'app/components/signup/components/signup/signup.client.html'
     });
 
 /* @ngInject */

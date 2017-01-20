@@ -1,6 +1,7 @@
 angular.module('candidate-template')
     .factory('candidateTemplateService', candidateTemplateService);
 
+/* @ngInject */
 function candidateTemplateService($http, candidateTemplateSettings) {
 
     let service = {
