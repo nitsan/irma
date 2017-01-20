@@ -1,6 +1,6 @@
 {
   "name": "irma",
-  "version": "2.7.4",
+  "version": "2.7.5",
   "description": "Meet 3",
   "main": "server.js",
   "dependencies": {
@@ -50,12 +50,12 @@
   "devDependencies": {
   },
   "scripts": {
-    "start": "webpack --config webpack.config.js -p --progress --colors & node server.js",
+    "start": "node server.js",
     "startDev": "webpack --config webpack.config.js & node server.js",
     "reBuild": "webpack --config webpack.config.js",
     "help": "webpack --help",
     "startProgress": "webpack --config webpack.config.js --progress --colors",
-    "build": "webpack --config webpack.config.js -p --progress --colors & node server.js",
+    "build": "webpack --config webpack.config.js -p --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nitsan Zohar",
