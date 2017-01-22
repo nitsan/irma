@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3001;
+const compression = require('compression');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -26,6 +27,7 @@ mongoose.connect(configDB.url);
 require('./server/modules/auto-increment/counters.server.model.js');
 
 // set up our express application
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
 app.use(morgan('dev')); // log every request to the console
