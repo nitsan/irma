@@ -58,6 +58,7 @@ app.use(require('./server/modules/candidates/candidate.server.controller.js'));
 app.use(require('./server/modules/interviewer/interviewer.server.controller'));
 app.use(require('./server/modules/sms/sms.server.contoller.js'));
 app.use(require('./server/modules/candidate-landing-page/candidate-landing-page.server.controller.js'));
+app.use(require('./server/modules/meetings/meetings.server.controller.js'));
 
 app.listen(port);
 console.log('The magic happens on port ' + port);

@@ -31,5 +31,17 @@ angular.module('candidates')
                         return interviewersService.getInterviewers();
                     }
                 }
+            }).state('meetingEditor', {
+                url: '/candidate/:candidateId/:meetingId',
+                params: {candidateId: null, meetingId: null},
+                template: '<meeting-editor meeting="$resolve.meeting" interviewers="$resolve.interviewers"></meeting-editor>',
+                resolve: {
+                    meeting: function (candidateMeetingsService, $stateParams) {
+                        return candidateMeetingsService.getMeetingById($stateParams.meetingId, $stateParams.candidateId);
+                    },
+                    interviewers: function (interviewersService) {
+                        return interviewersService.getInterviewers();
+                    }
+                }
             });
     });

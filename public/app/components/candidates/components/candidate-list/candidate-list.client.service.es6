@@ -29,6 +29,7 @@ function candidateListService($http, $uibModal) {
                 });
         },
         getCandidateById: function (candidateId) {
+            console.log("In getCandidateById");
             return new Promise((resolve) => {
                 if (!candidateId) {
                     resolve({});

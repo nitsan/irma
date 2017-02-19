@@ -1,0 +1,23 @@
+<button class="btn btn-success btn-add pull-right" ng-click="$ctrl.editMeeting()"><i class="fa fa-calendar-plus-o"></i> Add New Meeting</button>
+<div class="loading" ng-if="!$ctrl.meetingsTableParams"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+<table ng-show="$ctrl.meetingsTableParams" ng-table="$ctrl.meetingsTableParams" class="table table-condensed table-bordered table-striped">
+    <tr ng-repeat="row in $data">
+        <td data-title="'Interviewers'">{{::$ctrl.getInterviewers(row.interviewers)}}</td>
+        <td data-title="'Date'">{{::row.date | date:"dd/MM/yyyy"}}</td>
+        <td data-title="'Time'">{{::row.date | date:"HH:mm"}}</td>
+        <td>
+            <button class="btn btn-default" uib-tooltip="Edit Meeting"
+                    ng-click="$ctrl.editMeeting(row.meetingId)">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-danger" uib-tooltip="Delete Meeting"
+                    ng-click="$ctrl.deleteMeeting(row.meetingId)">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-success" uib-tooltip="Send SMS to Candidate"
+                    ng-click="$ctrl.sendSMS(row.meetingId)">
+                <i class="fa fa-mobile" aria-hidden="true"></i>
+            </button>
+        </td>
+    </tr>
+</table>

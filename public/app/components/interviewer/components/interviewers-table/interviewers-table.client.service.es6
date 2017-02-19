@@ -7,7 +7,7 @@ angular.module('interviewers')
     .factory('interviewersService', interviewersService);
 
 /* @ngInject */
-function interviewersService($http) {
+function interviewersService($http, $q) {
     let interviewersPromise = null;
     let interviewers = null;
     let interviewerMap = null;
@@ -16,7 +16,8 @@ function interviewersService($http) {
         getInterviewers: getInterviewers,
         getInterviewerMap: getInterviewerMap,
         saveInterviewer: saveInterviewer,
-        deleteInterviewer: deleteInterviewer
+        deleteInterviewer: deleteInterviewer,
+        getInterviewersDisplay: getInterviewersDisplay
     };
 
     return service;
@@ -41,16 +42,18 @@ function interviewersService($http) {
     }
 
     function getInterviewerMap() {
-        return new Promise((resolve) => {
-            if (interviewerMap) {
-                resolve(interviewerMap);
-            } else {
-                getInterviewers()
-                    .then(() => {
-                        resolve(interviewerMap);
-                    });
-            }
-        });
+        let deferred = $q.defer();
+
+        if (interviewerMap) {
+            deferred.resolve(interviewerMap);
+        } else {
+            getInterviewers()
+                .then(() => {
+                    deferred.resolve(interviewerMap);
+                });
+        }
+
+        return deferred.promise;
     }
 
     function saveInterviewer(interviewer) {
@@ -68,5 +71,19 @@ function interviewersService($http) {
                 resetClientCache();
                 return;
             });
+    }
+
+    function getInterviewersDisplay(interviewerIds) {
+        let interviewers = [];
+        if (interviewerIds){
+            for (let interviewerId of interviewerIds) {
+                let interviewer = interviewerMap[interviewerId];
+                if (interviewer) {
+                    interviewers.push(interviewer.displayName);
+                }
+            }
+        }
+
+        return interviewers.toString();
     }
 }

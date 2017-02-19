@@ -23,6 +23,7 @@ function smsService($http) {
     }
 
     function sendSMSToCandidate(candidate) {
+        console.log("In sendSMSToCandidate");
         return new Promise((resolve, reject) => {
             if (candidate && candidate.phone) {
                 resolve(sendSMS({candidate: candidate}));

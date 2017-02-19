@@ -28,10 +28,8 @@ let candidateSchema = new Schema({
         type: String,
         required: true
     },
-    interviewerIds: Array,
     img: String,
     team: String,
-    date: Date,
     createDate: Date,
     updateDate: Date
 }, {

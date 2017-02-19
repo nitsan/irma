@@ -1,0 +1,32 @@
+<table ng-table="$ctrl.candidateTableParams" class="table table-condensed table-bordered table-striped">
+    <tr ng-repeat-start="candidate in $data">
+        <td>{{$index + 1}}</td>
+        <td data-title="'Picture'">
+            <img class="img-rounded" ng-src="{{::candidate.img}}" alt="" height="50">
+        </td>
+        <td data-title="'First Name'">{{candidate.firstName}}</td>
+        <td data-title="'Last Name'">{{candidate.lastName}}</td>
+        <td data-title="'Phone'">{{candidate.phone}}</td>
+        <td data-title="'Phone'">{{candidate.email}}</td>
+        <td data-title="'Team'">{{candidate.team}}</td>
+        <td>
+            <button class="btn btn-default btn-sm" uib-tooltip="Edit Meetings"
+                    ng-click="candidate.editInterview=!candidate.editInterview">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-default btn-sm" uib-tooltip="Edit Candidate"
+                    ng-click="$ctrl.editCandidate(candidate)">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" uib-tooltip="Delete Candidate"
+                    ng-click="$ctrl.deleteCandidate(candidate)">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </td>
+    </tr>
+    <tr ng-repeat-end ng-if="candidate.editInterview">
+        <td colspan="8">
+            <candidate-meetings candidate="candidate"></candidate-meetings>
+        </td>
+    </tr>
+</table>
