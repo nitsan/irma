@@ -7,7 +7,7 @@ angular.module('user')
     .factory('userService', userService);
 
 /* @ngInject */
-function userService($http) {
+function userService($http, $q) {
     var currentUser = {};
 
     var service = {
@@ -34,22 +34,24 @@ function userService($http) {
     }
 
     function getUser() {
-        return new Promise((resolve, reject) => {
-            if (currentUser.userId) {
-                resolve(getCurrentUser());
-            } else {
-                $http.get('/user')
-                    .then(response => {
-                        let user = response.data;
-                        angular.copy(user, currentUser);
-                        resolve(currentUser);
-                    })
-                    .catch(err => {
-                        reject(err);
-                    })
+        let deferred = $q.defer();
 
-            }
-        });
+        if (currentUser.userId) {
+            deferred.resolve(getCurrentUser());
+        } else {
+            $http.get('/user')
+                .then(response => {
+                    let user = response.data;
+                    angular.copy(user, currentUser);
+                    deferred.resolve(currentUser);
+                })
+                .catch(err => {
+                    deferred.reject(err);
+                })
+
+        }
+
+        return deferred.promise;
     }
 
     function getCurrentUser() {
