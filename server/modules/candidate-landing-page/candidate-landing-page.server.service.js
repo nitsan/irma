@@ -37,7 +37,7 @@ exports.getCandidateLandingData = co.wrap(function*(userId, candidateId) {
     return candidateTemplate;
 });
 
-exports.getSmsForCandidate = co.wrap(function*(userId, candidateId) {
+exports.getSmsForCandidate = co.wrap(function*(userId, meeting) {
     let candidateTemplate;
     try {
         candidateTemplate = yield CandidateTemplateModel.findOne({userId: userId}, {
@@ -45,23 +45,23 @@ exports.getSmsForCandidate = co.wrap(function*(userId, candidateId) {
             info: 1
         });
     } catch (err) {
-        logger.error(`Cannot get sms text for user: ${userId} and candidate: ${candidateId}, err: ${err}`);
+        logger.error(`Cannot get sms text for user: ${userId} and meeting id: ${meeting.meetingId}, err: ${err}`);
         yield Promise.reject(err);
     }
 
-    return yield fillTemplate(userId, candidateId, candidateTemplate, candidateTemplate.template.sms);
+    return yield fillTemplate(userId, meeting, candidateTemplate, candidateTemplate.template.sms);
 });
 
-const fillTemplate = co.wrap(function*(userId, candidateId, candidateTemplate, templateText) {
-    let candidate = yield candidateService.getCandidateById(userId, candidateId);
+const fillTemplate = co.wrap(function*(userId, meeting, candidateTemplate, templateText) {
+    let candidate = yield candidateService.getCandidateById(userId, meeting.candidateId);
     let user = yield userService.getUserById(userId);
-    let interviewees = yield interviewerService.getInterviewersByIds(userId, candidate.interviewerIds);
+    let interviewees = yield interviewerService.getInterviewersByIds(userId, meeting.interviewers);
 
-    return buildTemplate(templateText, candidate, user, candidateTemplate, interviewees);
+    return buildTemplate(templateText, user, candidate, meeting, candidateTemplate, interviewees);
 });
 
 // call candidate, user, candidateTemplate, interviewees for eval
-function buildTemplate(template, candidate, user, candidateTemplate, interviewees) {
+function buildTemplate(template, user, candidate, meeting, candidateTemplate, interviewees) {
     let previewText = template;
 
     _.forEach(candidateLandingPageConfig.TEMPLATE_MAP, (replacement, placeHolder) => {

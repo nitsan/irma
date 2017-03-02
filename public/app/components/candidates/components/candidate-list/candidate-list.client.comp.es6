@@ -19,7 +19,6 @@ function candidateListCtrl(candidateListService, yesNoModalService, smsService, 
     let $ctrl = this;
     $ctrl.editCandidate = editCandidate;
     $ctrl.deleteCandidate = deleteCandidate;
-    $ctrl.sendSMS = sendSMS;
     $ctrl.getInterviewers = getInterviewers;
 
     function editCandidate(candidate) {
@@ -35,20 +34,6 @@ function candidateListCtrl(candidateListService, yesNoModalService, smsService, 
                     candidateListService.delete(candidate)
                         .then(() => {
                             toastr.success(`Candidate ${candidate.firstName} ${candidate.lastName} has been deleted`, "Delete");
-                        });
-                }
-            });
-    }
-
-    function sendSMS(candidate) {
-        let modalSms = yesNoModalService.createModal('Confirm SMS', `Are you sure you want to send SMS ${candidate.firstName} ${candidate.lastName}?`);
-
-        modalSms.result
-            .then(approve => {
-                if (approve) {
-                    smsService.sendSMSToCandidate(candidate)
-                        .then(() => {
-                            toastr.success(`SMS was sent to candidate ${candidate.firstName} ${candidate.lastName}`, "SMS");
                         });
                 }
             });

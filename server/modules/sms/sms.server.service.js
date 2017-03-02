@@ -13,22 +13,15 @@ const smsService = new TMClient(process.env.SMS_USER, process.env.SMS_TOKEN),
     candidateService = require('./../candidates/candidate.server.service'),
     interviewerService = require('./../interviewer/interviewer.server.service'),
     SmsLogModel = require('./sms-log.server.model'),
-    candidateLandingPageService = require('./../candidate-landing-page/candidate-landing-page.server.service.js');
+    candidateLandingPageService = require('./../candidate-landing-page/candidate-landing-page.server.service.js'),
+    meetingsService = require('./../meetings/meetings.server.service');
 
-exports.sendSmsToCandidate = function sendSmsToCandidate(userId, candidate) {
-    return new Promise((resolve) => {
-        logger.info(`Going to send sms to ${candidate.displayName}`);
-
-        candidateLandingPageService.getSmsForCandidate(userId, candidate.candidateId)
-            .then(smsText => {
-                logger.info("smsText: " + smsText);
-                sendSms(candidate.phone, smsText, userId, candidate.candidateId)
-                    .then(() => {
-                        resolve();
-                    });
-            });
-    });
-};
+exports.sendSmsToCandidate = co.wrap(function*(userId, meetingId) {
+    let meeting = yield meetingsService.getMeetingsById(userId, meetingId);
+    let smsText = yield candidateLandingPageService.getSmsForCandidate(userId, meeting);
+    let candidate = yield candidateService.getCandidateById(userId, meeting.candidateId);
+    yield sendSms(candidate.phone, smsText, userId, candidate.candidateId);
+});
 
 function sendSms(phoneNumbers, smsText, userId, candidateId) {
     return new Promise((resolve, reject) => {

@@ -8,12 +8,12 @@ let router = require('express').Router();
 let smsService = require('./sms.server.service.js'),
     authMiddleware = require('../../middlewares/auth.server.mid.js');
 
-router.post('/send-sms', authMiddleware.isLoggedIn, function (req, res) {
+router.post('/api/send-sms/:meetingId', authMiddleware.isLoggedIn, function (req, res) {
     let userId = req.user.userId;
-    let candidate = req.body.candidate;
-    smsService.sendSmsToCandidate(userId, candidate)
+    let meetingId = req.params.meetingId;
+    smsService.sendSmsToCandidate(userId, meetingId)
         .then(() => {
-            res.send();
+            res.send({success: true});
         });
 });
 

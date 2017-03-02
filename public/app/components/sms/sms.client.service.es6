@@ -10,7 +10,7 @@ angular
 /* @ngInject */
 function smsService($http) {
     let service = {
-        sendSMSToCandidate: sendSMSToCandidate,
+        sendSMS: sendSMS,
         sendSMSToInterviewers: sendSMSToInterviewers
     };
 
@@ -18,20 +18,8 @@ function smsService($http) {
 
     ////////////
 
-    function sendSMS(details) {
-        return $http.post('/send-sms', details);
-    }
-
-    function sendSMSToCandidate(candidate) {
-        console.log("In sendSMSToCandidate");
-        return new Promise((resolve, reject) => {
-            if (candidate && candidate.phone) {
-                resolve(sendSMS({candidate: candidate}));
-            } else {
-                console.error("candidate is not valid to send sms");
-                reject(new Error('Cannot get candidate phone number'));
-            }
-        });
+    function sendSMS(meetingId) {
+        return $http.post(`/api/send-sms/${meetingId}`);
     }
 
     function sendSMSToInterviewers(userId, candidateId) {

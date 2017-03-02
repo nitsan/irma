@@ -26,7 +26,7 @@ router.post('/api/candidate/:candidateId/meeting',
         let userId = req.user.userId;
         let candidateId = req.params.candidateId;
         let meeting = req.body;
-        meetingsService.createMeeting(userId, candidateId, meeting)
+        meetingsService.saveMeeting(userId, candidateId, meeting)
             .then(data => {
                 res.send(data);
             })

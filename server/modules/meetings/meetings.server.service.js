@@ -5,6 +5,10 @@ let logger = require('winston');
 const MeetingsModel = require('./meetings.server.model'),
     Counters = require('./../auto-increment/counters.server.model.js');
 
+exports.getMeetingsById = function getMeetingsById(userId, meetingId) {
+    return MeetingsModel.findOne({userId: userId, meetingId: meetingId}).exec();
+};
+
 exports.getMeetingsByCandidateId = function getMeetingsByCandidateId(userId, candidateId) {
     return new Promise((resolve, reject) => {
         logger.profile(`Get meetings for candidate [${candidateId}] for user: [${userId}]`);
@@ -19,7 +23,7 @@ exports.getMeetingsByCandidateId = function getMeetingsByCandidateId(userId, can
     });
 };
 
-exports.createMeeting = function createMeeting(userId, candidateId, meeting) {
+exports.saveMeeting = function saveMeeting(userId, candidateId, meeting) {
     return new Promise((resolve, reject) => {
         if (!meeting) {
             return reject(new Error("Cannot get meeting for create"));
@@ -28,6 +32,28 @@ exports.createMeeting = function createMeeting(userId, candidateId, meeting) {
         meeting.userId = userId;
         meeting.candidateId = candidateId;
 
+        if (meeting.meetingId) {
+            updateMeeting(userId, candidateId, meeting)
+                .then(updatedMeeting => {
+                    resolve(updatedMeeting);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        } else {
+            createMeeting(meeting)
+                .then(newMeeting => {
+                    resolve(newMeeting);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        }
+    });
+};
+
+function createMeeting(meeting) {
+    return new Promise((resolve, reject) => {
         Counters.getNextSequence('meetingId')
             .then(meetingId => {
                 meeting.meetingId = meetingId;
@@ -43,7 +69,24 @@ exports.createMeeting = function createMeeting(userId, candidateId, meeting) {
                 });
             });
     });
-};
+}
+
+function updateMeeting(userId, candidateId, meeting) {
+    return new Promise((resolve, reject) => {
+        MeetingsModel.findOneAndUpdate({
+            userId: userId,
+            candidateId: candidateId,
+            meetingId: meeting.meetingId
+        }, meeting, function (err, updatedMeeting) {
+            if (err) {
+                logger.error("Cannot update meeting, err" + err.message);
+                return reject(err);
+            }
+
+            resolve(updatedMeeting);
+        });
+    });
+}
 
 exports.deleteMeeting = function deleteMeeting(userId, candidateId, meetingId) {
     return new Promise((resolve, reject) => {
