@@ -8,10 +8,11 @@ let router = require('express').Router();
 let candidateLandingPageService = require('./candidate-landing-page.server.service'),
     authMiddleware = require('../../middlewares/auth.server.mid.js');
 
-router.get('/api/candidate-landing-data/:userId/:candidateId', function (req, res) {
-    let userId = req.params.userId;
-    let candidateId = req.params.candidateId;
-    candidateLandingPageService.getCandidateLandingData(userId, candidateId)
+router.get('/api/candidate-landing-data/:userId/:candidateId/:meetingId', function (req, res) {
+    const userId = req.params.userId;
+    const candidateId = req.params.candidateId;
+    const meetingId = req.params.meetingId;
+    candidateLandingPageService.getCandidateLandingData(userId, candidateId, meetingId)
         .then(data => {
             res.send(data);
         });

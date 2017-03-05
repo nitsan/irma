@@ -5,12 +5,12 @@ angular.module('candidate-landing-page', ['interviewers'])
     .config(function ($urlRouterProvider, $stateProvider) {
         $stateProvider
             .state('candidateLandingPage', {
-                url: '/candidate-landing-page/:userId/:candidateId',
+                url: '/candidate-landing-page/:userId/:candidateId/:meetingId',
                 public: true,
                 template: '<candidate-landing-page landing-page-data="$resolve.landingPageData"></candidate-landing-page>',
                 resolve: {
                     landingPageData: function (candidateLandingPageService, $stateParams) {
-                        return candidateLandingPageService.getCandidateLandingPageData($stateParams.userId, $stateParams.candidateId);
+                        return candidateLandingPageService.getCandidateLandingPageData($stateParams.userId, $stateParams.candidateId, $stateParams.meetingId);
                     }
                 }
             });

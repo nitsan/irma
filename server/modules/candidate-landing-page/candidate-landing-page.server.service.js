@@ -13,13 +13,14 @@ const candidateService = require('./../candidates/candidate.server.service'),
     userService = require('./../users/user.server.service'),
     interviewerService = require('./../interviewer/interviewer.server.service'),
     CandidateTemplateModel = require('./candidate-template.server.model'),
-    candidateLandingPageConfig = require('./candidate-landing-page.server.config');
+    candidateLandingPageConfig = require('./candidate-landing-page.server.config'),
+    meetingsService = require('./../meetings/meetings.server.service');
 
 //need this to eval in buildTemplate
 const serverAddress = process.env.NODE_ENV === 'prod' ? 'http://meet3.herokuapp.com' : `http://${ip.address()}:${process.env.PORT}`;
 
-exports.getCandidateLandingData = co.wrap(function*(userId, candidateId) {
-    logger.info(`getCandidateLandingData for candidate: ${candidateId} of user: ${userId}`);
+exports.getCandidateLandingData = co.wrap(function*(userId, candidateId, meetingId) {
+    logger.info(`getCandidateLandingData for candidate: ${candidateId} of user: ${userId} for meeting: ${meetingId}`);
     let candidateTemplate;
     try {
         candidateTemplate = yield CandidateTemplateModel.findOne({userId: userId}, {
@@ -31,7 +32,8 @@ exports.getCandidateLandingData = co.wrap(function*(userId, candidateId) {
         yield Promise.reject(err);
     }
 
-    candidateTemplate.template.message = yield fillTemplate(userId, candidateId, candidateTemplate, candidateTemplate.template.message);
+    const meeting = yield meetingsService.getMeetingsById(userId, meetingId);
+    candidateTemplate.template.message = yield fillTemplate(userId, meeting, candidateTemplate, candidateTemplate.template.message);
     buildAddresses(candidateTemplate);
 
     return candidateTemplate;
@@ -55,13 +57,13 @@ exports.getSmsForCandidate = co.wrap(function*(userId, meeting) {
 const fillTemplate = co.wrap(function*(userId, meeting, candidateTemplate, templateText) {
     let candidate = yield candidateService.getCandidateById(userId, meeting.candidateId);
     let user = yield userService.getUserById(userId);
-    let interviewees = yield interviewerService.getInterviewersByIds(userId, meeting.interviewers);
+    let interviewers = yield interviewerService.getInterviewersByIds(userId, meeting.interviewers);
 
-    return buildTemplate(templateText, user, candidate, meeting, candidateTemplate, interviewees);
+    return buildTemplate(templateText, user, candidate, meeting, candidateTemplate, interviewers);
 });
 
 // call candidate, user, candidateTemplate, interviewees for eval
-function buildTemplate(template, user, candidate, meeting, candidateTemplate, interviewees) {
+function buildTemplate(template, user, candidate, meeting, candidateTemplate, interviewers) {
     let previewText = template;
 
     _.forEach(candidateLandingPageConfig.TEMPLATE_MAP, (replacement, placeHolder) => {

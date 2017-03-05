@@ -19,8 +19,8 @@ function candidateLandingPageService(smsService, $http) {
         return smsService.sendSMSToInterviewers(userId, candidateId);
     }
 
-    function getCandidateLandingPageData(userId, candidateId) {
-        return $http.get(`/api/candidate-landing-data/${userId}/${candidateId}`)
+    function getCandidateLandingPageData(userId, candidateId, meetingId) {
+        return $http.get(`/api/candidate-landing-data/${userId}/${candidateId}/${meetingId}`)
             .then(response => {
                 return response.data;
             });
