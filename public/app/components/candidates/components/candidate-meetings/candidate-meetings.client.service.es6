@@ -20,13 +20,13 @@ function candidateMeetingsService($http, $q) {
 
         if (meetingsMap[candidateId]) {
             deferred.resolve(meetingsMap[candidateId]);
-            console.log("total cache time: " + (new Date().getTime() - st));
+            // console.log("total cache time: " + (new Date().getTime() - st));
         } else {
             $http.get(`/api/candidate/${candidateId}/meeting`)
                 .then(response => {
                     meetingsMap[candidateId] = response.data;
                     deferred.resolve(meetingsMap[candidateId]);
-                    console.log("total time: " + (new Date().getTime() - st));
+                    // console.log("total time: " + (new Date().getTime() - st));
                 })
                 .catch(response => {
                     let err = response.data;

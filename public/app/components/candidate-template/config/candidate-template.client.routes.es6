@@ -9,7 +9,8 @@ angular.module('candidate-template')
                 template: `<candidate-template candidate-template="$resolve.candidateTemplate"
                                                candidates="$resolve.candidates"
                                                user="$resolve.user" 
-                                               interviewees-map="$resolve.intervieweesMap">
+                                               interviewers-map="$resolve.interviewersMap"
+                                               meetings="$resolve.meetings">
                            </candidate-template>`,
                 params: {cache: true},
                 resolve: {
@@ -22,8 +23,11 @@ angular.module('candidate-template')
                     user: function (userService) {
                         return userService.getUser();
                     },
-                    intervieweesMap: function (interviewersService) {
+                    interviewersMap: function (interviewersService) {
                         return interviewersService.getInterviewerMap();
+                    },
+                    meetings: function (candidateMeetingsService, candidates) {
+                        return candidateMeetingsService.getMeetings(candidates[0].candidateId);
                     }
                 }
             });

@@ -50,11 +50,27 @@
                 </label>
                 <div class="col-sm-7">
                     <ui-select ng-model="$ctrl.candidate" theme="bootstrap" ng-disabled="disabled"
-                               ng-change="$ctrl.updatePreviews()">
+                               ng-change="$ctrl.onCandidateChange()">
                         <ui-select-match placeholder="Choose Candidate...">{{$select.selected.displayName}}
                         </ui-select-match>
                         <ui-select-choices repeat="candidate in $ctrl.candidates | filter: $select.search">
                             <div ng-bind-html="candidate.displayName | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Meeting for Preview:
+                    <span class="help-block">Only for example</span>
+                </label>
+                <div class="col-sm-7">
+                    <ui-select ng-model="$ctrl.meeting" theme="bootstrap" ng-disabled="disabled"
+                               ng-change="$ctrl.updatePreviews()"
+                               search-enabled="false">
+                        <ui-select-match placeholder="Choose Meeting...">{{$select.selected.date | date: 'dd/MM/yyyy @ HH:mm'}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="meeting in $ctrl.meetings | filter: $select.search">
+                            <div ng-bind-html="meeting.date | date: 'dd/MM/yyyy @ HH:mm' | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
                 </div>

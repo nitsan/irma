@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 angular.module('candidate-template')
     .factory('candidateTemplateService', candidateTemplateService);
 
@@ -26,13 +28,14 @@ function candidateTemplateService($http, candidateTemplateSettings) {
             });
     }
 
-    // need 'candidate, user, intervieweesMap' for eval
-    function buildPreview(template, candidate, user, candidateTemplate, intervieweesMap) {
+    // need 'candidate, user, interviewersMap' for eval
+    function buildPreview(template, user, candidate, meeting, candidateTemplate, interviewersMap) {
         let previewText = template;
         _.forEach(candidateTemplateSettings.templateMap, (replacement, placeHolder) => {
             try {
                 if (previewText.includes(placeHolder)) {
-                    previewText = previewText.replace(placeHolder, eval(replacement) || '');
+                    let evalValue = eval(replacement) || '';
+                    previewText = previewText.replace(placeHolder, evalValue);
                 }
             } catch (err) {
                 console.warn(`Cannot replace ${placeHolder} to ${replacement}, error: ${err}`);
@@ -42,10 +45,10 @@ function candidateTemplateService($http, candidateTemplateSettings) {
         return previewText;
     }
 
-    function buildIntervieweesString(intervieweesIds, intervieweesMap) {
+    function buildIntervieweesString(intervieweesIds, interviewersMap) {
         let intervieweesString = '';
         for (let interviewerId of intervieweesIds) {
-            let interviewer = intervieweesMap[interviewerId] || {};
+            let interviewer = interviewersMap[interviewerId] || {};
             intervieweesString = intervieweesString.concat(`${interviewer.title || ''} ${interviewer.displayName} and `);
         }
 

@@ -10,12 +10,13 @@ angular
             candidateTemplate: '<',
             candidates: '<',
             user: '<',
-            intervieweesMap: '<'
+            interviewersMap: '<',
+            meetings: '<'
         }
     });
 
 /* @ngInject */
-function candidateTemplateCtrl(candidateTemplateService, toastr, $uibModal, candidateLandingPageService) {
+function candidateTemplateCtrl(candidateTemplateService, toastr, $uibModal, candidateLandingPageService, candidateMeetingsService) {
     let $ctrl = this;
     $ctrl.buildMessagePreview = buildMessagePreview;
     $ctrl.buildSmsPreview = buildSmsPreview;
@@ -23,18 +24,20 @@ function candidateTemplateCtrl(candidateTemplateService, toastr, $uibModal, cand
     $ctrl.saveCandidate = saveCandidate;
     $ctrl.revertTemplate = revertTemplate;
     $ctrl.openPreviewModal = openPreviewModal;
+    $ctrl.onCandidateChange = onCandidateChange;
 
     this.$onInit = () => {
         $ctrl.templateCopy = angular.copy($ctrl.candidateTemplate);
         $ctrl.candidate = $ctrl.candidates[0];
+        $ctrl.meeting = $ctrl.meetings[0];
     };
 
     function buildMessagePreview() {
-        $ctrl.messagePreview = candidateTemplateService.buildPreview($ctrl.candidateTemplate.template.message, $ctrl.candidate, $ctrl.user, $ctrl.candidateTemplate, $ctrl.intervieweesMap);
+        $ctrl.messagePreview = candidateTemplateService.buildPreview($ctrl.candidateTemplate.template.message, $ctrl.user, $ctrl.candidate, $ctrl.meeting, $ctrl.candidateTemplate, $ctrl.interviewersMap);
     }
 
     function buildSmsPreview() {
-        $ctrl.smsPreview = candidateTemplateService.buildPreview($ctrl.candidateTemplate.template.sms, $ctrl.candidate, $ctrl.user, $ctrl.candidateTemplate, $ctrl.intervieweesMap);
+        $ctrl.smsPreview = candidateTemplateService.buildPreview($ctrl.candidateTemplate.template.sms, $ctrl.user, $ctrl.candidate, $ctrl.meeting, $ctrl.candidateTemplate, $ctrl.interviewersMap);
     }
 
     function updatePreviews() {
@@ -67,5 +70,14 @@ function candidateTemplateCtrl(candidateTemplateService, toastr, $uibModal, cand
                 }
             }
         });
+    }
+
+    function onCandidateChange() {
+        candidateMeetingsService.getMeetings($ctrl.candidate.candidateId)
+            .then(meetings => {
+                $ctrl.meetings = meetings;
+                $ctrl.meeting = meetings.length ? meetings[0] : {date: new Date()};
+                updatePreviews();
+            });
     }
 }

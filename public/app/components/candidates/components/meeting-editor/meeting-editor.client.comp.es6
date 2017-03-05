@@ -23,7 +23,6 @@ function meetingEditorCtrl(candidateMeetingEditorService, toastr, $state, candid
 
     $ctrl.$onInit = () => {
         $ctrl.copyMeeting = angular.copy($ctrl.meeting);
-        console.log("Got meeting: ", $ctrl.meeting);
         if ($ctrl.meeting && $ctrl.meeting.date){
             $ctrl.meeting.date = new Date($ctrl.meeting.date);
         }

@@ -6,8 +6,8 @@ angular.module('candidate-template')
         templateMap: {
             '{{companyName}}': 'candidateTemplate.info.companyName',
             '{{candidate.displayName}}': 'candidate.displayName',
-            '{{candidate.date}}': 'moment(candidate.date).format("dddd, MMMM Do YYYY, H:mm")',
-            '{{interviewees}}': 'buildIntervieweesString(candidate.interviewerIds, intervieweesMap)',
+            '{{meeting.date}}': 'moment(meeting.date).format("dddd, MMMM Do YYYY, H:mm")',
+            '{{interviewers}}': 'buildIntervieweesString(meeting.interviewers, interviewersMap)',
             '{{companyAddress}}': 'candidateTemplate.address.address',
             '{{user.displayName}}': 'user.displayName',
             '{{user.title}}': 'user.title',
