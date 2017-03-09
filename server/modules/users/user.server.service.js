@@ -21,3 +21,16 @@ exports.getUserById = co.wrap(function*(userId) {
 
     return user;
 });
+
+exports.updateLastLogin = co.wrap(function*(userId) {
+    let user;
+
+    try {
+        user = yield UserModel.findOneAndUpdate({userId: userId}, {lastLogin: new Date()});
+    } catch (err) {
+        logger.error(`Cannot get user ${userId}, err: ${err}`);
+        yield Promise.reject(err);
+    }
+
+    return user;
+});

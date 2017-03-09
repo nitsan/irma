@@ -26,7 +26,7 @@ let userSchema = mongoose.Schema({
             type: String
         }
     },
-    groupId: String,
+    lastLogin: Date,
     local: {
         email: {
             type: String,

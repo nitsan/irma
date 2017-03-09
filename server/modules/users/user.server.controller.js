@@ -3,6 +3,7 @@
 let router = require('express').Router(),
     passport = require('passport');
 
+const userService = require('./user.server.service');
 
 router.get('/user', function (req, res) {
     res.send(req.user);
@@ -24,6 +25,7 @@ router.post('/login', function (req, res, next) {
                     err: 'Could not log in user'
                 });
             }
+            userService.updateLastLogin(user.userId);
             res.json(user);
         });
     })(req, res, next);
