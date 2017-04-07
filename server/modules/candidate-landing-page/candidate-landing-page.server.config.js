@@ -30,6 +30,6 @@ See more details here: {{link}}`
         '{{user.title}}': 'user.title',
         '{{user.mobilePhone}}': 'user.phone.mobile',
         '{{user.officePhone}}': 'user.phone.office',
-        '{{link}}': '`${serverAddress}/#/candidate-landing-page/${user.userId}/${candidate.candidateId}`'
+        '{{link}}': '`${serverAddress}/#/candidate-landing-page/${user.userId}/${candidate.candidateId}/${meeting.meetingId}`'
     }
 };
