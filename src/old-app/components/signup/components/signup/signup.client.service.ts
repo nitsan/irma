@@ -1,7 +1,8 @@
 angular.module('signup')
     .factory('signUpService', signUpService);
 
-/* @ngInject */
+signUpService.$inject= ['$http'];
+
 function signUpService($http) {
 
     let service = {

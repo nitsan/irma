@@ -14,8 +14,9 @@ angular
         }
     });
 
-/* @ngInject */
-function candidateListCtrl(candidateListService, yesNoModalService, smsService, $state, toastr) {
+candidateListCtrl.$inject= ['candidateListService', 'yesNoModalService', '$state', 'toastr'];
+
+function candidateListCtrl(candidateListService, yesNoModalService, $state, toastr) {
     let $ctrl = this;
     $ctrl.editCandidate = editCandidate;
     $ctrl.deleteCandidate = deleteCandidate;

@@ -4,7 +4,8 @@
 angular.module('candidates')
     .factory('candidateEditorService', candidateEditorService);
 
-/* @ngInject */
+candidateEditorService.$inject= ['$http'];
+
 function candidateEditorService($http) {
     var candidateEditorService = {
         getCandidate: function (candidateId) {

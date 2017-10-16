@@ -2,7 +2,8 @@
 angular.module('candidates')
     .factory('candidateMeetingEditorService', candidateMeetingEditorService);
 
-/* @ngInject */
+candidateMeetingEditorService.$inject= ['$http'];
+
 function candidateMeetingEditorService($http) {
     let meetingsMap = {};
 

@@ -6,7 +6,8 @@ import * as angular from 'angular';
 angular.module('candidate-landing-page')
     .factory('candidateLandingPageService', candidateLandingPageService);
 
-/* @ngInject */
+candidateLandingPageService.$inject = ["smsService", "$http"];
+
 function candidateLandingPageService(smsService, $http) {
 
     let service = {

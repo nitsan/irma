@@ -10,7 +10,8 @@ class User {
 angular.module('user')
     .factory('userService', userService);
 
-/* @ngInject */
+userService.$inject= ['$http', '$q'];
+
 function userService($http, $q) {
     var currentUser = new User();
 

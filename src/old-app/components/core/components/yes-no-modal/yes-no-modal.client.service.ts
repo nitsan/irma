@@ -3,7 +3,8 @@ import * as angular from 'angular';
 angular.module('core')
     .factory('yesNoModalService', yesNoModalService);
 
-/* @ngInject */
+yesNoModalService.$inject= ['$uibModal'];
+
 function yesNoModalService($uibModal) {
     let service = {
         createModal: createModal

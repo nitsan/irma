@@ -15,7 +15,8 @@ angular
         }
     });
 
-/* @ngInject */
+candidateTableCtrl.$inject= ['NgTableParams', '$state', 'yesNoModalService', 'candidateListService', 'toastr'];
+
 function candidateTableCtrl(NgTableParams, $state, yesNoModalService, candidateListService, toastr) {
     let $ctrl = this;
     $ctrl.candidateTableParams;

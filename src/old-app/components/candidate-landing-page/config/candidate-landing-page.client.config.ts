@@ -2,8 +2,9 @@
  * Created by Nitsan Zohar on 28/10/2015.
  */
 
-angular.module('candidate-landing-page', ['interviewers'])
-    .config(function ($urlRouterProvider, $stateProvider) {
+landingPageConfig.$inject = ['$urlRouterProvider', '$stateProvider'];
+
+function landingPageConfig ($urlRouterProvider, $stateProvider) {
     $stateProvider
         .state('candidateLandingPage', {
             url: '/candidate-landing-page/:userId/:candidateId/:meetingId',
@@ -15,4 +16,7 @@ angular.module('candidate-landing-page', ['interviewers'])
                 }
             }
         });
-});
+}
+
+angular.module('candidate-landing-page', ['interviewers'])
+    .config(landingPageConfig);

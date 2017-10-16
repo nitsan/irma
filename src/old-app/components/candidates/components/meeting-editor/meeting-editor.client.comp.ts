@@ -15,7 +15,8 @@ angular
         }
     });
 
-/* @ngInject */
+meetingEditorCtrl.$inject= ['candidateMeetingEditorService', 'toastr', '$state', 'candidateMeetingsService'];
+
 function meetingEditorCtrl(candidateMeetingEditorService, toastr, $state, candidateMeetingsService) {
     let $ctrl = this;
     $ctrl.saveMeeting = saveMeeting;

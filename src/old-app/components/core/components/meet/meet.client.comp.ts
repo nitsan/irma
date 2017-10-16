@@ -27,7 +27,8 @@ angular
 `
     });
 
-/* @ngInject */
+meetCtrl.$inject= ['$scope'];
+
 function meetCtrl($scope) {
     let $ctrl = this;
 

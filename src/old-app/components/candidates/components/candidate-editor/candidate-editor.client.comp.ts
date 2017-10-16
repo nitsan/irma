@@ -24,7 +24,8 @@ angular
         }
     });
 
-/* @ngInject */
+candidateEditorCtrl.$inject= ['candidateSettings', 'candidateEditorService', '$state', 'toastr', '$uibModal', 'interviewersService'];
+
 function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, toastr, $uibModal, interviewersService) {
     let $ctrl = this;
     $ctrl.saveCandidate = saveCandidate;

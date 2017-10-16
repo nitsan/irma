@@ -33,7 +33,6 @@ require('./components/signup/signup.client.module');
 require('./components/core/components/meet/meet.client.comp');
 
 
-
 const app = angular.module('meet', [
     'ngAnimate',
     'toastr',
@@ -51,8 +50,7 @@ const app = angular.module('meet', [
     'interviewers'
 ]);
 
-app.run(function ($rootScope, userService, $location, $state) {
-    "ngInject";
+function run($rootScope, userService, $location, $state) {
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
         // console.log(`Go to ${toState.name}, from ${fromState ? fromState.name : 'none'}`);
         if (!toState.approved) {
@@ -74,9 +72,14 @@ app.run(function ($rootScope, userService, $location, $state) {
                 });
         }
     });
-});
+}
 
-app.config(function ($urlRouterProvider) {
-    "ngInject";
+run.$inject = ['$rootScope', 'userService', '$location', '$state'];
+app.run(run);
+
+function config($urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
-});
+}
+
+config.$inject = ['$urlRouterProvider'];
+app.config(config);

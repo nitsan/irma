@@ -8,7 +8,8 @@ angular
         templateUrl: './signup.client.html'
     });
 
-/* @ngInject */
+signUpCtrl.$inject= ['signUpService', 'toastr', '$state'];
+
 function signUpCtrl(signUpService, toastr, $state) {
     let $ctrl = this;
     $ctrl.signUp = signUp;

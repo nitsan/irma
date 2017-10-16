@@ -10,7 +10,8 @@ angular
         templateUrl: './login.comp.html'
     });
 
-/* @ngInject */
+loginCtrl.$inject= ['$state', 'toastr', 'userService'];
+
 function loginCtrl($state, toastr, userService) {
     let $ctrl = this;
     $ctrl.user;

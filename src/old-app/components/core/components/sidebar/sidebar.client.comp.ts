@@ -13,7 +13,8 @@ angular
         templateUrl: './sidebar.client.html'
     });
 
-/* @ngInject */
+sideBarCtrl.$inject= ['$scope', '$state'];
+
 function sideBarCtrl($scope, $state) {
     let $ctrl = this;
 

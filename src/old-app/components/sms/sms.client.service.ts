@@ -7,7 +7,8 @@ angular
     .module('sms', [])
     .factory('smsService', smsService);
 
-/* @ngInject */
+smsService.$inject= ['$http'];
+
 function smsService($http) {
     let service = {
         sendSMS: sendSMS,

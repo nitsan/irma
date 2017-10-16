@@ -15,7 +15,8 @@ angular
         }
     });
 
-/* @ngInject */
+candidateMeetingsCtrl.$inject= ['NgTableParams', '$state', 'candidateMeetingsService', 'interviewersService', 'toastr', 'yesNoModalService', 'smsService'];
+
 function candidateMeetingsCtrl(NgTableParams, $state, candidateMeetingsService, interviewersService, toastr, yesNoModalService, smsService) {
     let $ctrl = this;
     // $ctrl.addMeeting = addMeeting;

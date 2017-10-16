@@ -7,7 +7,8 @@ import * as _ from 'lodash';
 angular.module('interviewers')
     .factory('interviewersService', interviewersService);
 
-/* @ngInject */
+interviewersService.$inject= ['$http', '$q'];
+
 function interviewersService($http, $q) {
     let interviewersPromise = null;
     let interviewers = null;

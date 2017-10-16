@@ -1,8 +1,10 @@
 /**
  * Created by Nitsan Zohar on 28/10/2015.
  */
-angular.module('candidates')
-    .config(function ($urlRouterProvider, $stateProvider) {
+
+candidateRoutesConfig.$inject = ['$urlRouterProvider', '$stateProvider'];
+
+function candidateRoutesConfig($urlRouterProvider, $stateProvider) {
 
     $urlRouterProvider.otherwise('/');
 
@@ -44,4 +46,7 @@ angular.module('candidates')
             }
         }
     });
-});
+}
+
+angular.module('candidates')
+    .config(candidateRoutesConfig);

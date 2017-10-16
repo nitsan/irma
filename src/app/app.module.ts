@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {UpgradeModule} from "@angular/upgrade/static";
 import * as angular from 'angular';
 import {setAngularLib} from '@angular/upgrade/static';
-import '../old-app/main';
 import '../old-app/app';
 
 
@@ -24,10 +23,10 @@ import '../old-app/app';
 
 export class AppModule {
     constructor(private upgrade: UpgradeModule) {
-        // setAngularLib(angular);
+        setAngularLib(angular);
     }
 
     ngDoBootstrap() {
-        // this.upgrade.bootstrap(document.body, ['meet'], {strictDi: true});
+        this.upgrade.bootstrap(document.body, ['meet'], {strictDi: true});
     }
 }

@@ -10,7 +10,8 @@ angular
 
     });
 
-/* @ngInject */
+navBarCtrl.$inject= ['$scope', 'userService', '$state', 'toastr'];
+
 function navBarCtrl($scope, userService, $state, toastr) {
     let $ctrl = this;
     $ctrl.logout = logout;

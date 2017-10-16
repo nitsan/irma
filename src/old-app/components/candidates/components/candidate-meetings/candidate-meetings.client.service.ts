@@ -4,7 +4,8 @@ import * as _ from 'lodash';
 angular.module('candidates')
     .factory('candidateMeetingsService', candidateMeetingsService);
 
-/* @ngInject */
+candidateMeetingsService.$inject= ['$http', '$q'];
+
 function candidateMeetingsService($http, $q) {
     let meetingsMap = {};
 

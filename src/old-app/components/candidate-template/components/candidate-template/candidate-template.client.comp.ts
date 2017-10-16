@@ -17,7 +17,8 @@ angular
         }
     });
 
-/* @ngInject */
+candidateTemplateCtrl.$inject = ['candidateTemplateService', 'toastr', '$uibModal', 'candidateLandingPageService', 'candidateMeetingsService'];
+
 function candidateTemplateCtrl(candidateTemplateService, toastr, $uibModal, candidateLandingPageService, candidateMeetingsService) {
     let $ctrl = this;
     $ctrl.buildMessagePreview = buildMessagePreview;

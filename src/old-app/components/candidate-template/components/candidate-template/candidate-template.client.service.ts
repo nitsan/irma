@@ -5,7 +5,8 @@ import * as _ from 'lodash';
 angular.module('candidate-template')
     .factory('candidateTemplateService', candidateTemplateService);
 
-/* @ngInject */
+candidateTemplateService.$inject= ['$http', 'candidateTemplateSettings'];
+
 function candidateTemplateService($http, candidateTemplateSettings) {
 
     let service = {

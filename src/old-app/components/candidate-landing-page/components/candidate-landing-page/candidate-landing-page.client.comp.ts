@@ -13,7 +13,8 @@ angular
         }
     });
 
-/* @ngInject */
+candidateLandingPageCtrl.$inject = ["candidateLandingPageService", "$stateParams"];
+
 function candidateLandingPageCtrl(candidateLandingPageService, $stateParams) {
     let $ctrl = this;
     $ctrl.imHere = imHere;

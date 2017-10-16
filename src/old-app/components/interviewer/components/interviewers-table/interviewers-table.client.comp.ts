@@ -14,7 +14,8 @@ angular
         }
     });
 
-/* @ngInject */
+interviewerTableCtrl.$inject= ['NgTableParams', 'interviewerSettings', 'interviewersService', 'toastr', 'yesNoModalService'];
+
 function interviewerTableCtrl(NgTableParams, interviewerSettings, interviewersService, toastr, yesNoModalService) {
     let $ctrl = this;
     $ctrl.addLine = addLine;
