@@ -28,8 +28,7 @@ require('./server/modules/auto-increment/counters.server.model.js');
 
 // set up our express application
 app.use(compression());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/scripts', express.static(__dirname + '/node_modules/'));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json());

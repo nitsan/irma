@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~angular-toastr/dist/angular-toastr.css";
+@import "~ui-select/dist/select.css";
+@import "~textangular/dist/textAngular.css";
+@import "~ng-table/bundles/ng-table.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "old-app/assets/css/application.css";
+@import "old-app/assets/css/style.css";
