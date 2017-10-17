@@ -3,18 +3,19 @@
  */
 import * as angular from 'angular';
 
+const template = require('./login.comp.html');
+
 angular
     .module('user')
     .component('login', {
         controller: loginCtrl,
-        templateUrl: './login.comp.html'
+        template: template
     });
 
-loginCtrl.$inject= ['$state', 'toastr', 'userService'];
+loginCtrl.$inject = ['$state', 'toastr', 'userService'];
 
 function loginCtrl($state, toastr, userService) {
-    let $ctrl = this;
-    $ctrl.user;
+    const $ctrl = this;
     $ctrl.login = login;
 
     $ctrl.$onInit = () => {

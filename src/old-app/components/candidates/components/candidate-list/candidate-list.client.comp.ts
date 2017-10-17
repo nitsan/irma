@@ -1,20 +1,22 @@
 /**
  * Created by Nitsan on 27/10/2016.
  */
-'use strict';
+import * as angular from 'angular';
+
+const template = require('./candidate-list.client.html');
 
 angular
     .module('candidates')
     .component('candidateList', {
         controller: candidateListCtrl,
-        templateUrl: './candidate-list.client.html',
+        template: template,
         bindings: {
             candidateList: '=',
             interviewerMap: '<'
         }
     });
 
-candidateListCtrl.$inject= ['candidateListService', 'yesNoModalService', '$state', 'toastr'];
+candidateListCtrl.$inject = ['candidateListService', 'yesNoModalService', '$state', 'toastr'];
 
 function candidateListCtrl(candidateListService, yesNoModalService, $state, toastr) {
     let $ctrl = this;
@@ -42,7 +44,7 @@ function candidateListCtrl(candidateListService, yesNoModalService, $state, toas
 
     function getInterviewers(candidate) {
         let interviewers = [];
-        if (candidate.interviewerIds){
+        if (candidate.interviewerIds) {
             for (let interviewerId of candidate.interviewerIds) {
                 let interviewer = $ctrl.interviewerMap[interviewerId];
                 if (interviewer) {

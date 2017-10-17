@@ -3,6 +3,8 @@
  */
 import * as angular from 'angular';
 
+const template = require('./candidate-editor.client.html');
+
 class ValidObj {
     valid: boolean;
     field: string;
@@ -17,14 +19,14 @@ angular
     .module('candidates')
     .component('candidateEditor', {
         controller: candidateEditorCtrl,
-        templateUrl: './candidate-editor.client.html',
+        template: template,
         bindings: {
             candidate: '<',
             interviewers: '<'
         }
     });
 
-candidateEditorCtrl.$inject= ['candidateSettings', 'candidateEditorService', '$state', 'toastr', '$uibModal', 'interviewersService'];
+candidateEditorCtrl.$inject = ['candidateSettings', 'candidateEditorService', '$state', 'toastr', '$uibModal', 'interviewersService'];
 
 function candidateEditorCtrl(candidateSettings, candidateEditorService, $state, toastr, $uibModal, interviewersService) {
     let $ctrl = this;

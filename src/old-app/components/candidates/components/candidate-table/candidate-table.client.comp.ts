@@ -2,20 +2,23 @@
  * Created by nitsa on 24/01/2017.
  */
 import * as angular from 'angular';
+
 require('./candidate-table.scss');
+
+const template = require('./candidate-table.client.html');
 
 angular
     .module('candidates')
     .component('candidateTable', {
         controller: candidateTableCtrl,
-        templateUrl: './candidate-table.client.html',
+        template: template,
         bindings: {
             candidateList: '<',
             filterText: '<'
         }
     });
 
-candidateTableCtrl.$inject= ['NgTableParams', '$state', 'yesNoModalService', 'candidateListService', 'toastr'];
+candidateTableCtrl.$inject = ['NgTableParams', '$state', 'yesNoModalService', 'candidateListService', 'toastr'];
 
 function candidateTableCtrl(NgTableParams, $state, yesNoModalService, candidateListService, toastr) {
     let $ctrl = this;

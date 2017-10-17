@@ -22,7 +22,7 @@
     "angular-sanitize": "~1.6.6",
     "angular-toastr": "^1.7.0",
     "angular-ui-bootstrap": "^2.3.1",
-    "angular-ui-router": "^0.3.2",
+    "angular-ui-router": "^0.4.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "co": "^4.6.0",
@@ -79,7 +79,8 @@
   "scripts": {
     "start": "ng serve --proxy-config proxy.conf.json",
     "start:server": "node server.js",
-    "build": "ng build",
+    "build": "ng build -prod --aot",
+    "build-dev": "ng build --env=dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -1,11 +1,11 @@
 import * as angular from 'angular';
 import * as _ from 'lodash';
+// const moment = require('moment'); // need it to eval(replacement)
 
-// const moment = require('moment');
 angular.module('candidate-template')
     .factory('candidateTemplateService', candidateTemplateService);
 
-candidateTemplateService.$inject= ['$http', 'candidateTemplateSettings'];
+candidateTemplateService.$inject = ['$http', 'candidateTemplateSettings'];
 
 function candidateTemplateService($http, candidateTemplateSettings) {
 
@@ -37,7 +37,7 @@ function candidateTemplateService($http, candidateTemplateSettings) {
         _.forEach(candidateTemplateSettings.templateMap, (replacement, placeHolder) => {
             try {
                 if (previewText.includes(placeHolder)) {
-                    let evalValue = eval(replacement) || '';
+                    const evalValue = eval(replacement) || '';
                     previewText = previewText.replace(placeHolder, evalValue);
                 }
             } catch (err) {
@@ -50,8 +50,8 @@ function candidateTemplateService($http, candidateTemplateSettings) {
 
     function buildIntervieweesString(intervieweesIds, interviewersMap) {
         let intervieweesString = '';
-        for (let interviewerId of intervieweesIds) {
-            let interviewer = interviewersMap[interviewerId] || {};
+        for (const interviewerId of intervieweesIds) {
+            const interviewer = interviewersMap[interviewerId] || {};
             intervieweesString = intervieweesString.concat(`${interviewer.title || ''} ${interviewer.displayName} and `);
         }
 

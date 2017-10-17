@@ -3,11 +3,13 @@
  */
 import * as angular from 'angular';
 
+const template = require('./candidate-template.client.html');
+
 angular
     .module('candidate-template')
     .component('candidateTemplate', {
         controller: candidateTemplateCtrl,
-        templateUrl: './candidate-template.client.html',
+        template: template,
         bindings: {
             candidateTemplate: '<',
             candidates: '<',

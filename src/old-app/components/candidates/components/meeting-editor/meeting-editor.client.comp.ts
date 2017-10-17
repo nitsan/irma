@@ -15,7 +15,7 @@ angular
         }
     });
 
-meetingEditorCtrl.$inject= ['candidateMeetingEditorService', 'toastr', '$state', 'candidateMeetingsService'];
+meetingEditorCtrl.$inject = ['candidateMeetingEditorService', 'toastr', '$state', 'candidateMeetingsService'];
 
 function meetingEditorCtrl(candidateMeetingEditorService, toastr, $state, candidateMeetingsService) {
     let $ctrl = this;
@@ -24,7 +24,7 @@ function meetingEditorCtrl(candidateMeetingEditorService, toastr, $state, candid
 
     $ctrl.$onInit = () => {
         $ctrl.copyMeeting = angular.copy($ctrl.meeting);
-        if ($ctrl.meeting && $ctrl.meeting.date){
+        if ($ctrl.meeting && $ctrl.meeting.date) {
             $ctrl.meeting.date = new Date($ctrl.meeting.date);
         }
     };
@@ -45,12 +45,12 @@ function meetingEditorCtrl(candidateMeetingEditorService, toastr, $state, candid
                 console.error("Cannot create user, err: " + response.data.message);
             });
     }
-    
+
     function cancel() {
         angular.copy($ctrl.copyMeeting, $ctrl.meeting);
         goBack();
     }
-    
+
     function goBack() {
         $state.go("candidateList");
     }

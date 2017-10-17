@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 angular.module('candidates')
     .factory('candidateListService', candidateListService);
 
-candidateListService.$inject= ['$http', '$uibModal'];
+candidateListService.$inject = ['$http', '$uibModal'];
 
 function candidateListService($http, $uibModal) {
     var candidateList = [];

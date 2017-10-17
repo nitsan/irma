@@ -15,21 +15,21 @@ function candidateTemplateRoutesConfig($stateProvider) {
                            </candidate-template>`,
             params: {cache: true},
             resolve: {
-                candidateTemplate: function (candidateTemplateService) {
+                candidateTemplate: ['candidateTemplateService', function (candidateTemplateService) {
                     return candidateTemplateService.getCandidateTemplate();
-                },
-                candidates: function (candidateListService) {
+                }],
+                candidates: ['candidateListService', function (candidateListService) {
                     return candidateListService.getCandidates();
-                },
-                user: function (userService) {
+                }],
+                user: ['userService', function (userService) {
                     return userService.getUser();
-                },
-                interviewersMap: function (interviewersService) {
+                }],
+                interviewersMap: ['interviewersService', function (interviewersService) {
                     return interviewersService.getInterviewerMap();
-                },
-                meetings: function (candidateMeetingsService, candidates) {
+                }],
+                meetings: ['candidateMeetingsService', 'candidates', function (candidateMeetingsService, candidates) {
                     return candidateMeetingsService.getMeetings(candidates[0].candidateId);
-                }
+                }]
             }
         });
 }

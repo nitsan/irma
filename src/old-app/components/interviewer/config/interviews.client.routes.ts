@@ -8,12 +8,12 @@ function interviewsRoutesConfig($stateProvider) {
     $stateProvider
         .state('interviewerList', {
             url: '/interviewerList',
-            template: '<interviewer-list interviewer-list="$resolve.interviewerList"></interviewer-list>',
+            template: '<me-interviewer-list [interviewer-list]="$resolve.interviewerList"></me-interviewer-list>',
             params: {cache: true},
             resolve: {
-                interviewerList: function (interviewersService, $stateParams) {
+                interviewerList: ['interviewersService', '$stateParams', function (interviewersService, $stateParams) {
                     return interviewersService.getInterviewers($stateParams.cache);
-                }
+                }]
             }
         });
 }

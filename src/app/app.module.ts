@@ -6,6 +6,7 @@ import {UpgradeModule} from "@angular/upgrade/static";
 import * as angular from 'angular';
 import {setAngularLib} from '@angular/upgrade/static';
 import '../old-app/app';
+import {InterviewerModule} from "./interviewer/interviewer.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import '../old-app/app';
     ],
     imports: [
         BrowserModule,
-        UpgradeModule
+        UpgradeModule,
+        InterviewerModule
     ],
     providers: [],
     // bootstrap: [AppComponent]

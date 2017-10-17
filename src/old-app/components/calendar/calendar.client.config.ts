@@ -2,6 +2,8 @@
  * Created by Nitsan Zohar on 28/10/2015.
  */
 
+const template = require('./calendar.client.html');
+
 calendarConfig.$inject = ['$stateProvider'];
 
 function calendarConfig($stateProvider) {
@@ -9,7 +11,7 @@ function calendarConfig($stateProvider) {
     $stateProvider
         .state('calendarPage', {
             url: '/calendar',
-            templateUrl: './calendar.client.html'
+            template: template
         });
 }
 

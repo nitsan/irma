@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 angular.module('candidates')
     .factory('candidateMeetingsService', candidateMeetingsService);
 
-candidateMeetingsService.$inject= ['$http', '$q'];
+candidateMeetingsService.$inject = ['$http', '$q'];
 
 function candidateMeetingsService($http, $q) {
     let meetingsMap = {};
@@ -54,7 +54,7 @@ function candidateMeetingsService($http, $q) {
         } else {
             getMeetings(candidateId)
                 .then(() => {
-                let candidateMeetings = meetingsMap[candidateId];
+                    let candidateMeetings = meetingsMap[candidateId];
                     if (candidateMeetings) {
                         let meeting = _.find(candidateMeetings, {meetingId: meetingId});
                         deferred.resolve(meeting);

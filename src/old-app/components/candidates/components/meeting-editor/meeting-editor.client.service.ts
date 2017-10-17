@@ -2,7 +2,7 @@
 angular.module('candidates')
     .factory('candidateMeetingEditorService', candidateMeetingEditorService);
 
-candidateMeetingEditorService.$inject= ['$http'];
+candidateMeetingEditorService.$inject = ['$http'];
 
 function candidateMeetingEditorService($http) {
     let meetingsMap = {};

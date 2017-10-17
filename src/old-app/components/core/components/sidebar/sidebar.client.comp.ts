@@ -1,22 +1,21 @@
 /**
- * Created by nitsa on 10/11/2016.
- */
-/**
  * Created by Nitsan on 27/10/2016.
  */
 import * as angular from 'angular';
+
+const template = require('./sidebar.client.html');
 
 angular
     .module('core')
     .component('sideBar', {
         controller: sideBarCtrl,
-        templateUrl: './sidebar.client.html'
+        template: template
     });
 
-sideBarCtrl.$inject= ['$scope', '$state'];
+sideBarCtrl.$inject = ['$scope', '$state'];
 
 function sideBarCtrl($scope, $state) {
-    let $ctrl = this;
+    const $ctrl = this;
 
     this.$onInit = () => {
         $ctrl.selected = $state.current.name;

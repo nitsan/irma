@@ -3,22 +3,27 @@
  */
 import * as angular from 'angular';
 import * as _ from 'lodash';
+
 require('./candidate-meetings.scss');
+
+const template = require('./candidate-meetings.client.html');
 
 angular
     .module('candidates')
     .component('candidateMeetings', {
         controller: candidateMeetingsCtrl,
-        templateUrl: './candidate-meetings.client.html',
+        template: template,
         bindings: {
             candidate: '<'
         }
     });
 
-candidateMeetingsCtrl.$inject= ['NgTableParams', '$state', 'candidateMeetingsService', 'interviewersService', 'toastr', 'yesNoModalService', 'smsService'];
+candidateMeetingsCtrl.$inject = ['NgTableParams', '$state', 'candidateMeetingsService', 'interviewersService', 'toastr',
+    'yesNoModalService', 'smsService'];
 
-function candidateMeetingsCtrl(NgTableParams, $state, candidateMeetingsService, interviewersService, toastr, yesNoModalService, smsService) {
-    let $ctrl = this;
+function candidateMeetingsCtrl(NgTableParams, $state, candidateMeetingsService, interviewersService, toastr,
+                               yesNoModalService, smsService) {
+    const $ctrl = this;
     // $ctrl.addMeeting = addMeeting;
     $ctrl.editMeeting = editMeeting;
     $ctrl.getInterviewers = getInterviewers;
@@ -38,10 +43,10 @@ function candidateMeetingsCtrl(NgTableParams, $state, candidateMeetingsService, 
     // };
 
     function createTable(meetings) {
-        let initialParams = {
+        const initialParams = {
             count: 5 // initial page size
         };
-        let initialSettings = {
+        const initialSettings = {
             // page size buttons (right set of buttons in demo)
             counts: [],
             // determines the pager buttons (left set of buttons in demo)
@@ -62,7 +67,7 @@ function candidateMeetingsCtrl(NgTableParams, $state, candidateMeetingsService, 
     }
 
     function deleteMeeting(meetingId) {
-        let modalInstance = yesNoModalService.createModal('Confirm Delete', "Are you sure you want to delete this meeting?");
+        const modalInstance = yesNoModalService.createModal('Confirm Delete', "Are you sure you want to delete this meeting?");
 
         modalInstance.result
             .then(approve => {
@@ -70,7 +75,8 @@ function candidateMeetingsCtrl(NgTableParams, $state, candidateMeetingsService, 
                     candidateMeetingsService.deleteMeeting(meetingId, $ctrl.candidate.candidateId)
                         .then(() => {
                             toastr.success('Meeting has been deleted', "Delete");
-                            $ctrl.meetingsTableParams.settings().dataset = _.reject($ctrl.meetingsTableParams.settings().dataset, {meetingId: meetingId});
+                            $ctrl.meetingsTableParams.settings().dataset =
+                                _.reject($ctrl.meetingsTableParams.settings().dataset, {meetingId: meetingId});
                             $ctrl.meetingsTableParams.reload();
                             candidateMeetingsService.removeCandidateMeetingCache($ctrl.candidate.candidateId);
                         })
@@ -83,7 +89,8 @@ function candidateMeetingsCtrl(NgTableParams, $state, candidateMeetingsService, 
     }
 
     function sendSMS(meetingId) {
-        let modalSms = yesNoModalService.createModal('Confirm SMS', `Are you sure you want to send SMS ${$ctrl.candidate.firstName} ${$ctrl.candidate.lastName}?`);
+        const modalSms = yesNoModalService.createModal(
+            'Confirm SMS', `Are you sure you want to send SMS ${$ctrl.candidate.firstName} ${$ctrl.candidate.lastName}?`);
 
         modalSms.result
             .then(approve => {

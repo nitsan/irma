@@ -2,9 +2,9 @@
  * Created by nitsa on 05/02/2016.
  */
 
-userRoutesConfig.$inject = ['$urlRouterProvider', '$stateProvider'];
+userRoutesConfig.$inject = ['$stateProvider'];
 
-function userRoutesConfig($urlRouterProvider, $stateProvider) {
+function userRoutesConfig($stateProvider) {
     $stateProvider
         .state('login', {
             url: '/login',

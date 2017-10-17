@@ -1,14 +1,18 @@
 /**
  * Created by Nitsan on 26/12/2016.
  */
+import * as angular from 'angular';
+
+const template = require('./signup.client.html');
+
 angular
     .module('signup')
     .component('signUp', {
         controller: signUpCtrl,
-        templateUrl: './signup.client.html'
+        template: template
     });
 
-signUpCtrl.$inject= ['signUpService', 'toastr', '$state'];
+signUpCtrl.$inject = ['signUpService', 'toastr', '$state'];
 
 function signUpCtrl(signUpService, toastr, $state) {
     let $ctrl = this;

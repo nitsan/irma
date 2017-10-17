@@ -1,12 +1,14 @@
 /**
  * Created by Nitsan on 19/12/2016.
  */
-'use strict';
+import * as angular from 'angular';
+
+const template = require('./interviewer-list.client.html');
 
 angular
     .module('interviewers')
     .component('interviewerList', {
-        templateUrl: './interviewer-list.client.html',
+        template: template,
         bindings: {
             interviewerList: '<'
         }

@@ -3,11 +3,13 @@
  */
 import * as angular from 'angular';
 
+const template = require('./candidate-landing-page.client.html');
+
 angular
     .module('candidate-landing-page')
     .component('candidateLandingPage', {
         controller: candidateLandingPageCtrl,
-        templateUrl: './candidate-landing-page.client.html',
+        template: template,
         bindings: {
             landingPageData: '<'
         }

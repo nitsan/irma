@@ -2,15 +2,17 @@
  * Created by Nitsan on 27/10/2016.
  */
 import * as angular from 'angular';
+
+const template = require('./navbar.client.html');
+
 angular
     .module('core')
     .component('navBar', {
         controller: navBarCtrl,
-        templateUrl: './navbar.client.html'
-
+        template: template
     });
 
-navBarCtrl.$inject= ['$scope', 'userService', '$state', 'toastr'];
+navBarCtrl.$inject = ['$scope', 'userService', '$state', 'toastr'];
 
 function navBarCtrl($scope, userService, $state, toastr) {
     let $ctrl = this;

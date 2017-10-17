@@ -4,7 +4,7 @@
 angular.module('candidates')
     .factory('candidateEditorService', candidateEditorService);
 
-candidateEditorService.$inject= ['$http'];
+candidateEditorService.$inject = ['$http'];
 
 function candidateEditorService($http) {
     var candidateEditorService = {

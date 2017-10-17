@@ -4,20 +4,22 @@
 import * as angular from 'angular';
 import * as _ from 'lodash';
 
+const template = require('./interviewers-table.client.html');
+
 angular
     .module('interviewers')
     .component('interviewersTable', {
         controller: interviewerTableCtrl,
-        templateUrl: './interviewers-table.client.html',
+        template: template,
         bindings: {
             interviewerList: '='
         }
     });
 
-interviewerTableCtrl.$inject= ['NgTableParams', 'interviewerSettings', 'interviewersService', 'toastr', 'yesNoModalService'];
+interviewerTableCtrl.$inject = ['NgTableParams', 'interviewerSettings', 'interviewersService', 'toastr', 'yesNoModalService'];
 
 function interviewerTableCtrl(NgTableParams, interviewerSettings, interviewersService, toastr, yesNoModalService) {
-    let $ctrl = this;
+    const $ctrl = this;
     $ctrl.addLine = addLine;
     $ctrl.editRow = editRow;
     $ctrl.saveLine = saveLine;
@@ -32,7 +34,7 @@ function interviewerTableCtrl(NgTableParams, interviewerSettings, interviewersSe
     };
 
     function addLine() {
-        let newRow = {
+        const newRow = {
             $isNew: true,
             $isEditing: true
         };
@@ -71,7 +73,8 @@ function interviewerTableCtrl(NgTableParams, interviewerSettings, interviewersSe
         if (row.$isNew) {
             removeRowFromTable(row);
         } else {
-            let confirmDeleteModal = yesNoModalService.createModal('Confirm Delete', `Are you sure you want to delete ${row.displayName}?`);
+            const confirmDeleteModal =
+                yesNoModalService.createModal('Confirm Delete', `Are you sure you want to delete ${row.displayName}?`);
 
             confirmDeleteModal.result
                 .then(approve => {
